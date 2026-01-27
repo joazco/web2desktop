@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import { MakerDebConfig } from "@electron-forge/maker-deb";
 import { MakerSquirrelConfig } from "@electron-forge/maker-squirrel";
 import type { ForgeConfig } from "@electron-forge/shared-types";

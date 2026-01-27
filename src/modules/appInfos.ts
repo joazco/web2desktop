@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import { nativeTheme, screen } from "electron";
 
 import config from "../config";

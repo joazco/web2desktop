@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 // Map AppConfigInterface -> form controls (themeSource/fullScreen/resizable/closable/openDevtools).
 const setForm = (appConfig) => {
   const { fullScreen, resizable, themeSource, openDevtools, closable } =

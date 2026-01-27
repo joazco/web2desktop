@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 // See the Electron documentation for details on how to use preload scripts:
 
 import { AppConfigInterface } from "./types";
