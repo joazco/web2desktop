@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import {
   app,
   BrowserWindow,
@@ -25,6 +31,7 @@ export class App {
   ) {}
 
   createWindow() {
+    // Main app window: size is based on the primary display work area.
     const primaryDisplay = screen.getPrimaryDisplay();
     const { width, height } = primaryDisplay.workAreaSize;
     this.window = new BrowserWindow({
@@ -38,29 +45,26 @@ export class App {
         preload: path.join(__dirname, "..", "preload.js"),
       },
     });
-    /** bounds */
+    // Restore last window bounds (if available).
     this.initBounds();
-    /** */
 
-    // this.window.setMenu(null);
-
+    // Load the renderer UI from /www.
     this.window.loadFile(path.join(__dirname, "..", "..", "www", "index.html"));
     global.mainWindow = this.window;
 
-    /** */
+    // UI + lifecycle wiring.
     this.setMenu();
     this.listeners();
     this.disableDevToolInProduction();
     this.openLinkInExternalBrowser();
-    /** */
 
-    /** Modules */
+    // Initialize feature modules after the window exists.
     this.appInfos.init();
     this.steam.init();
-    /** */
   }
 
   private listeners() {
+    // IPC handlers used by the preload bridge.
     ipcMain.handle("ping", () => {
       return "pong";
     });
@@ -72,6 +76,7 @@ export class App {
     });
     ipcMain.handle("setAppConfig", (_, config: Partial<AppConfigInterface>) => {
       this.appInfos.sendAppInfos(config);
+      // Re-center after size changes for better UX.
       if (config.size) {
         setTimeout(() => {
           this.window.center();
@@ -80,6 +85,7 @@ export class App {
     });
     ipcMain.handle("resetAppConfig", () => {
       this.appInfos.resetAppInfos();
+      // Re-center after reset to keep the window in view.
       setTimeout(() => {
         this.window.center();
       }, 100);
@@ -87,6 +93,7 @@ export class App {
   }
 
   private initBounds() {
+    // Persist the last window position/size across sessions.
     const bounds = getData<Electron.Rectangle>("bounds");
     if (bounds) {
       this.window.setBounds(bounds);
@@ -97,6 +104,7 @@ export class App {
   }
 
   private disableDevToolInProduction() {
+    // Prevent opening DevTools in production when configured.
     if (global.isProduction && config.disableOpenDevToolOnProduction) {
       globalShortcut.register("CommandOrControl+Shift+I", () => {});
       globalShortcut.register("F12", () => {});
@@ -108,6 +116,7 @@ export class App {
   }
 
   private openLinkInExternalBrowser() {
+    // Any window.open() links are opened in the default browser.
     this.window.webContents.setWindowOpenHandler((details) => {
       shell.openExternal(details.url);
       return { action: "deny" };
@@ -115,6 +124,7 @@ export class App {
   }
 
   private setMenu() {
+    // Provide a minimal menu so copy/paste works.
     let menu = Menu.buildFromTemplate([]);
     menu = Menu.buildFromTemplate([
       {

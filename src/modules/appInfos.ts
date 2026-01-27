@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import { nativeTheme, screen } from "electron";
 
 import config from "../config";
@@ -10,6 +16,7 @@ export class AppInfos {
   async sendAppInfos(defaultValue: Partial<AppConfigInterface> = {}) {
     const mainWindow = global.mainWindow;
 
+    // Apply incoming config first, then publish the current state.
     await this.applyConfig(defaultValue);
     const currentConfig: Partial<AppConfigInterface> = {
       name: mainWindow.getTitle(),
@@ -28,12 +35,15 @@ export class AppInfos {
   }
 
   init() {
+    // Restore last known config and push it to the renderer.
     const c = getData<Partial<AppConfigInterface>>("appConfig") || {};
 
     this.sendAppInfos({ ...config, ...c });
 
     const mainWindow = global.mainWindow;
 
+    // Debounced resize: mainly used to notify the UI when the user
+    // resizes the window or exits/enters fullscreen.
     mainWindow.on("resize", () => {
       if (this.resizeDebounceTimer) {
         clearTimeout(this.resizeDebounceTimer);
@@ -52,6 +62,7 @@ export class AppInfos {
   }
 
   resetAppInfos() {
+    // Reset to defaults (including a sane window size).
     const primaryDisplay = screen.getPrimaryDisplay();
     const { width, height } = primaryDisplay.workAreaSize;
     this.sendAppInfos({
@@ -65,6 +76,7 @@ export class AppInfos {
 
   private async applyConfig(newConfig: Partial<AppConfigInterface>) {
     const mainWindow = global.mainWindow;
+    // Fullscreen has special constraints when the window isn't resizable.
     if (newConfig.fullScreen !== undefined) {
       const resizable = mainWindow.isResizable();
       mainWindow.setFullScreenable(true);
@@ -79,6 +91,7 @@ export class AppInfos {
     if (newConfig.closable !== undefined) {
       mainWindow.setClosable(newConfig.closable);
     }
+    // Sync OS theme.
     if (newConfig.themeSource !== undefined) {
       nativeTheme.themeSource = newConfig.themeSource;
     }
@@ -93,6 +106,7 @@ export class AppInfos {
     ) {
       mainWindow.webContents.closeDevTools();
     }
+    // Apply partial size updates.
     if (newConfig.size?.width) {
       mainWindow.setBounds({ width: newConfig.size.width });
     }
@@ -100,6 +114,7 @@ export class AppInfos {
       mainWindow.setBounds({ height: newConfig.size.height });
     }
 
+    // Give the window time to settle before reading back state.
     await this.wait(300);
   }
 

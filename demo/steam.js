@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 let steamIsWorking = false;
 
 // Query Steam for achievement status and update the UI.
@@ -16,7 +22,7 @@ const checkIfIsActive = () => {
     achievementStatus.textContent = "Steam OFF";
     return;
   }
-  window.electron?.steam.achievement.isActivated(
+  window.web2desktop?.steam.achievement.isActivated(
     achievementId,
     (isActivated) => {
       achievementStatus.textContent = isActivated ? "YES" : "NO";
@@ -40,7 +46,7 @@ const activateAchievement = () => {
     achievementStatus.textContent = "Steam OFF";
     return;
   }
-  window.electron?.steam.achievement.activate(
+  window.web2desktop?.steam.achievement.activate(
     achievementId,
     (isActivated) => {
       achievementStatus.textContent = isActivated ? "YES" : "NO";
@@ -64,7 +70,7 @@ const clearAchievement = () => {
     achievementStatus.textContent = "Steam OFF";
     return;
   }
-  window.electron?.steam.achievement.clear(achievementId, (isActivated) => {
+  window.web2desktop?.steam.achievement.clear(achievementId, (isActivated) => {
     achievementStatus.textContent = isActivated ? "YES" : "NO";
   });
 };
@@ -72,11 +78,11 @@ const clearAchievement = () => {
 // Initialize the demo steam UI once the DOM is ready.
 document.addEventListener("DOMContentLoaded", async () => {
   // Fetch initial Steam state and gamer name.
-  window.electron?.steam.isWorking((isWorking) => {
+  window.web2desktop?.steam.isWorking((isWorking) => {
     steamIsWorking = isWorking;
     if (isWorking) {
       document.getElementById("steam-is-working").textContent = "YES";
-      window.electron?.steam.getName((name) => {
+      window.web2desktop?.steam.getName((name) => {
         if (name) {
           document.getElementById("steam-gamer-name").textContent = name;
         } else {
