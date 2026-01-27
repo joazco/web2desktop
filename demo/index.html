@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="./" />
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+  </head>
+  <body>
+    <main>
+      <h1 data-web2desktop="title"></h1>
+      <form>
+        <!-- Theme source -->
+        <fieldset>
+          <legend>Theme source</legend>
+          <div>
+            <input
+              type="radio"
+              id="themeSource-toggle-system"
+              name="themeSource-toggle"
+              value="system"
+            />
+            <label for="themeSource-toggle-system">System</label>
+            <input
+              type="radio"
+              id="themeSource-toggle-light"
+              name="themeSource-toggle"
+              value="light"
+            />
+            <label for="themeSource-toggle-light">Light</label>
+            <input
+              type="radio"
+              id="themeSource-toggle-dark"
+              name="themeSource-toggle"
+              value="dark"
+            />
+            <label for="themeSource-toggle-dark">Dark</label>
+          </div>
+        </fieldset>
+        <!-- Open Dev Tools -->
+        <fieldset>
+          <legend>Open Dev Tools</legend>
+          <div>
+            <input
+              type="radio"
+              id="openDevtools-toggle-yes"
+              name="openDevtools-toggle"
+              value="yes"
+            />
+            <label for="openDevtools-toggle-yes">Yes</label>
+            <input
+              type="radio"
+              id="openDevtools-toggle-no"
+              name="openDevtools-toggle"
+              value="no"
+            />
+            <label for="openDevtools-toggle-no">No</label>
+          </div>
+        </fieldset>
+        <!-- Full Screen -->
+        <fieldset>
+          <legend>Full Screen</legend>
+          <div>
+            <input
+              type="radio"
+              id="fullScreen-toggle-yes"
+              name="fullScreen-toggle"
+              value="yes"
+            />
+            <label for="fullScreen-toggle-yes">Yes</label>
+            <input
+              type="radio"
+              id="fullScreen-toggle-no"
+              name="fullScreen-toggle"
+              value="no"
+            />
+            <label for="fullScreen-toggle-no">No</label>
+          </div>
+        </fieldset>
+        <!-- Resizable -->
+        <fieldset>
+          <legend>Resizable</legend>
+          <div>
+            <input
+              type="radio"
+              id="resizable-toggle-yes"
+              name="resizable-toggle"
+              value="yes"
+            />
+            <label for="resizable-toggle-yes">Yes</label>
+            <input
+              type="radio"
+              id="resizable-toggle-no"
+              name="resizable-toggle"
+              value="no"
+            />
+            <label for="resizable-toggle-no">No</label>
+          </div>
+        </fieldset>
+        <!-- Closable -->
+        <fieldset>
+          <legend>Closable</legend>
+          <div>
+            <input
+              type="radio"
+              id="closable-toggle-yes"
+              name="closable-toggle"
+              value="yes"
+            />
+            <label for="closable-toggle-yes">Yes</label>
+            <input
+              type="radio"
+              id="closable-toggle-no"
+              name="closable-toggle"
+              value="no"
+            />
+            <label for="closable-toggle-no">No</label>
+          </div>
+        </fieldset>
+        <!-- Sizes -->
+        <fieldset>
+          <legend>Example sizes</legend>
+          <div>
+            <button type="button" id="button-full-screen-window">
+              Full screen Window
+            </button>
+            <button type="button" id="button-full-hd">Full HD</button>
+            <button type="button" id="button-tablet">Tablet</button>
+            <button type="button" id="button-mobile">Mobile</button>
+          </div>
+        </fieldset>
+        <!-- Steam -->
+        <fieldset>
+          <legend>Steam</legend>
+          <!-- Steam isWorking -->
+          <fieldset>
+            <legend>Steam isWorking</legend>
+            <b><span id="steam-is-working"></span></b>
+          </fieldset>
+          <!-- Steam Gamer Name -->
+          <fieldset>
+            <legend>Steam Gamer Name</legend>
+            <b><span id="steam-gamer-name"></span></b>
+          </fieldset>
+          <!-- Steam Achievement -->
+          <fieldset>
+            <legend>Achievement</legend>
+            <input
+              type="text"
+              id="steam-achievement"
+              name="steam-achievement"
+              value="START_ADVENTURE"
+            />
+            <button type="button" id="steam-achievement-activate">
+              Activate achievement
+            </button>
+            <button type="button" id="steam-achievement-clear">
+              Clear achievement
+            </button>
+            <div>
+              Activated:
+              <b><span id="steam-achievement-is-activated">-</span></b>
+            </div>
+          </fieldset>
+        </fieldset>
+      </form>
+    </main>
+    <br />
+    <footer>
+      <button id="button-reset-default-config">Reset default config</button>
+      <button id="button-quit-app">Quit App</button>
+    </footer>
+  </body>
+  <script src="app.js"></script>
+  <script src="steam.js"></script>
+</html>

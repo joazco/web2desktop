@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev",
+      "type": "npm",
+      "script": "dev",
+      "detail": "Starts dev mode (TS watch + Electron).",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "dev:demo",
+      "type": "npm",
+      "script": "dev:demo",
+      "detail": "Syncs demo -> www, then starts dev mode.",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "make",
+      "type": "npm",
+      "script": "make",
+      "detail": "Builds and packages the Electron app (make).",
+      "problemMatcher": []
+    },
+    {
+      "label": "lint",
+      "type": "npm",
+      "script": "lint",
+      "detail": "Runs ESLint across the project.",
+      "problemMatcher": []
+    }
+  ]
+}

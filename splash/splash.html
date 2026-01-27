@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="./" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      *,
+      *::after,
+      *::before {
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-app-region: no-drag;
+        cursor: default;
+      }
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: transparent;
+      }
+      img {
+        max-width: 800px;
+        max-height: 600px;
+        width: max-content;
+        height: max-content;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Standard */
+      }
+    </style>
+  </head>
+  <body>
+    <img src="splash.png" />
+  </body>
+</html>
