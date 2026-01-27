@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import { app, BrowserWindow, Menu } from "electron";
 import started from "electron-squirrel-startup";
 
@@ -11,10 +17,10 @@ if (started) {
   app.quit();
 }
 
+/** Create modules */
 const splashWindow = new SplashScreen();
 const appInfos = new AppInfos();
 const steam = new Steam();
-
 const appWindow = new App(appInfos, steam);
 
 const createWindow = async () => {

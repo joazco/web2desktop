@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import { AppConfigInterface } from "./types";
 
 const config: Omit<AppConfigInterface, "size"> = {
