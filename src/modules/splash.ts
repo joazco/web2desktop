@@ -11,6 +11,7 @@ import config from "../config";
 
 export class SplashScreen {
   createWindow(): Promise<void> {
+    // Lightweight, frameless splash shown during startup.
     const win = new BrowserWindow({
       width: 800,
       height: 600,
@@ -24,11 +25,14 @@ export class SplashScreen {
       },
     });
 
+    // No menu or window chrome for the splash.
     win.setMenu(null);
 
+    // Load the static splash HTML.
     win.loadFile(path.join(__dirname, "..", "..", "splash", "splash.html"));
 
     return new Promise<void>((resolve) => {
+      // Keep the splash visible briefly, then close it.
       setTimeout(() => {
         win.close();
         resolve();

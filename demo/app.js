@@ -53,7 +53,7 @@ const formChange = (event) => {
     config.closable = target.value === "yes";
   }
 
-  window.electron?.setAppConfig(config);
+  window.web2desktop?.setAppConfig(config);
 };
 
 // Preset sizes -> setAppConfig({ size: { width, height } }).
@@ -61,7 +61,7 @@ const clickSize = () => {
   document
     .getElementById("button-full-screen-window")
     .addEventListener("click", () => {
-      window.electron?.setAppConfig({
+      window.web2desktop?.setAppConfig({
         size: {
           width: screen.width,
           height: screen.height,
@@ -69,7 +69,7 @@ const clickSize = () => {
       });
     });
   document.getElementById("button-full-hd").addEventListener("click", () => {
-    window.electron?.setAppConfig({
+    window.web2desktop?.setAppConfig({
       size: {
         width: 1920,
         height: 1080,
@@ -77,7 +77,7 @@ const clickSize = () => {
     });
   });
   document.getElementById("button-tablet").addEventListener("click", () => {
-    window.electron?.setAppConfig({
+    window.web2desktop?.setAppConfig({
       size: {
         width: 820,
         height: 1180,
@@ -85,7 +85,7 @@ const clickSize = () => {
     });
   });
   document.getElementById("button-mobile").addEventListener("click", () => {
-    window.electron?.setAppConfig({
+    window.web2desktop?.setAppConfig({
       size: {
         width: 430,
         height: 932,
@@ -107,9 +107,9 @@ const setAppName = (appName) => {
 // Initialize the demo UI once the DOM is ready.
 document.addEventListener("DOMContentLoaded", async () => {
   // Optional Electron bridge: ping returns "pong" per web2desktop.d.ts.
-  console.log(await window.electron?.ping());
+  console.log(await window.web2desktop?.ping());
   // Receive AppConfigInterface updates from onAppConfig and reflect in UI.
-  window.electron?.onAppConfig((data) => {
+  window.web2desktop?.onAppConfig((data) => {
     setAppName(data.name);
     setForm(data);
   });
@@ -126,11 +126,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("button-reset-default-config")
     .addEventListener("click", () => {
       // resetAppConfig restores the default AppConfigInterface.
-      window.electron?.resetAppConfig();
+      window.web2desktop?.resetAppConfig();
     });
 
   document.getElementById("button-quit-app").addEventListener("click", () => {
     // quitApp closes the Electron app.
-    window.electron?.quitApp();
+    window.web2desktop?.quitApp();
   });
 });
