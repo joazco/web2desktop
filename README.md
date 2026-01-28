@@ -14,6 +14,12 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 4. [Control Window](./docs/CONTROL_WINDOW.md)
    - [Typescript](./docs/TYPESCRIPT.md)
 5. [Change differents icons](./docs/ICONS.md)
+6. [Steam](./docs/STEAM.md)
+   - [Achievements](./docs/ACHIEVEMENTS.md)
+7. [Build and Make application](./docs/BUILD_AND_MAKE.md)
+   - [Windows](./docs//BUILD_WINDOWS.md)
+   - [MacOS](./docs/BUILD_MACOS.md)
+   - [Linux](./docs/BUILD_LINUX.md)
 
 ---
 
