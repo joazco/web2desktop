@@ -113,4 +113,13 @@ If web2desktop helps you, you can support its development via GitHub Sponsors (c
 
 ---
 
+## 🧩 Showcase
+
+### Dark Blue Dungeon
+
+[Dark Blue Dungeon](https://store.steampowered.com/app/3119460/Dark_Blue_Dungeon/) is an RPG video game built with JavaScript technologies and uses Web2Desktop to be deployed on Steam.
+![Dark Blue Dungeon demo](./docs/showcase/darkbluedungeon.gif)
+
+---
+
 Built with care for the open source community 🚀
