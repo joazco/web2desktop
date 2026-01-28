@@ -8,17 +8,22 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 
 ## 📄 Docs
 
-1. [Installation](./docs/INSTALLATION.md)
-2. [Configuration](./docs/CONFIGURATION.md)
-3. [Bridge a Web Project to Web2Desktop](./docs/WEB_PROJECT_BRIDGE.md)
-4. [Control Window](./docs/CONTROL_WINDOW.md)
-   - [Typescript](./docs/TYPESCRIPT.md)
-5. [Change differents icons](./docs/ICONS.md)
-6. [Steam](./docs/STEAM.md)
+1. Getting started
+   - [Installation](./docs/INSTALLATION.md)
+   - [Configuration](./docs/CONFIGURATION.md)
+   - [Bridge a Web Project](./docs/WEB_PROJECT_BRIDGE.md)
+2. Window & API
+   - [Control Window (Preload API)](./docs/CONTROL_WINDOW.md)
+   - [TypeScript typings](./docs/TYPESCRIPT.md)
+3. Assets
+   - [Icons & Splash](./docs/ICONS.md)
+4. Steam
+   - [Steam basics](./docs/STEAM.md)
    - [Achievements](./docs/ACHIEVEMENTS.md)
-7. [Build and Make application](./docs/BUILD_AND_MAKE.md)
-   - [Windows](./docs//BUILD_WINDOWS.md)
-   - [MacOS](./docs/BUILD_MACOS.md)
+5. Build & packaging
+   - [Build and Make](./docs/BUILD_AND_MAKE.md)
+   - [Windows](./docs/BUILD_WINDOWS.md)
+   - [macOS](./docs/BUILD_MACOS.md)
    - [Linux](./docs/BUILD_LINUX.md)
 
 ---
