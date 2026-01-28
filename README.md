@@ -10,6 +10,7 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 
 1. [Installation](./docs/INSTALLATION.md)
 2. [Configuration](./docs/CONFIGURATION.md)
+3. [Bridge a Web Project to Web2Desktop]('./WEB_PROJECT_BRIDGE.md)
 
 ---
 
