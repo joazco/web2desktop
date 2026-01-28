@@ -6,6 +6,12 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 
 ---
 
+## 📄 Docs
+
+- [Installation](./docs/INSTALLATION.md)
+
+---
+
 ## ✨ Why Web2Desktop?
 
 Building desktop apps from web projects often feels heavier than it should be.
