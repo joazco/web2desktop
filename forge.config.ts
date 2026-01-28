@@ -35,6 +35,7 @@ const config: ForgeConfig = {
       /^\/\.vscode($|\/)/,
       /^\/scripts($|\/)/,
       /^\/src($|\/)/,
+      /^\/docs($|\/)/,
       /^\/tsconfig\.json$/,
       /^\/forge\.config\.(ts|js)$/,
       /^\/\.md$/,
