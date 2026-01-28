@@ -62,6 +62,7 @@ const clickSize = () => {
     .getElementById("button-full-screen-window")
     .addEventListener("click", () => {
       window.web2desktop?.setAppConfig({
+        fullScreen: false,
         size: {
           width: screen.width,
           height: screen.height,
@@ -70,6 +71,7 @@ const clickSize = () => {
     });
   document.getElementById("button-full-hd").addEventListener("click", () => {
     window.web2desktop?.setAppConfig({
+      fullScreen: false,
       size: {
         width: 1920,
         height: 1080,
@@ -78,6 +80,7 @@ const clickSize = () => {
   });
   document.getElementById("button-tablet").addEventListener("click", () => {
     window.web2desktop?.setAppConfig({
+      fullScreen: false,
       size: {
         width: 820,
         height: 1180,
@@ -86,6 +89,7 @@ const clickSize = () => {
   });
   document.getElementById("button-mobile").addEventListener("click", () => {
     window.web2desktop?.setAppConfig({
+      fullScreen: false,
       size: {
         width: 430,
         height: 932,
