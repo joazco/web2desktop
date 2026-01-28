@@ -13,6 +13,7 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 3. [Bridge a Web Project to Web2Desktop](./docs/WEB_PROJECT_BRIDGE.md)
 4. [Control Window](./docs/CONTROL_WINDOW.md)
    - [Typescript](./docs/TYPESCRIPT.md)
+5. [Change differents icons](./docs/ICONS.md)
 
 ---
 
