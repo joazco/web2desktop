@@ -7,15 +7,13 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
 
-import config from "../config";
-
 export class SplashScreen {
   createWindow(): Promise<void> {
     // Lightweight, frameless splash shown during startup.
     const win = new BrowserWindow({
       width: 800,
       height: 600,
-      title: config.name,
+      title: global.config.name,
       center: true,
       frame: false,
       resizable: false,

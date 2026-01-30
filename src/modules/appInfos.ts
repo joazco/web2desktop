@@ -6,7 +6,6 @@
 
 import { nativeTheme, screen } from "electron";
 
-import config from "../config";
 import { AppConfigInterface } from "../types";
 import { getData, setData } from "../utils/store";
 
@@ -38,7 +37,7 @@ export class AppInfos {
     // Restore last known config and push it to the renderer.
     const c = getData<Partial<AppConfigInterface>>("appConfig") || {};
 
-    this.sendAppInfos({ ...config, ...c });
+    this.sendAppInfos({ ...global.config, ...c });
 
     const mainWindow = global.mainWindow;
 
@@ -66,7 +65,7 @@ export class AppInfos {
     const primaryDisplay = screen.getPrimaryDisplay();
     const { width, height } = primaryDisplay.workAreaSize;
     this.sendAppInfos({
-      ...config,
+      ...global.config,
       size: {
         width: width / 2,
         height: height / 1.5,
@@ -97,7 +96,7 @@ export class AppInfos {
     }
     if (
       newConfig.openDevtools &&
-      !(global.isProduction && config.disableOpenDevToolOnProduction)
+      !(global.isProduction && global.config.disableOpenDevToolOnProduction)
     ) {
       mainWindow.webContents.openDevTools();
     } else if (
