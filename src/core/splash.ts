@@ -7,6 +7,8 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
 
+import { loadPlugins } from "../utils/pluginLoader";
+
 export class SplashScreen {
   createWindow(): Promise<void> {
     // Lightweight, frameless splash shown during startup.
@@ -31,7 +33,8 @@ export class SplashScreen {
 
     return new Promise<void>((resolve) => {
       // Keep the splash visible briefly, then close it.
-      setTimeout(() => {
+      setTimeout(async () => {
+        await loadPlugins(path.join(__dirname, "..", "plugins"));
         win.close();
         resolve();
       }, 2000);

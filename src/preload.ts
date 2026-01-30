@@ -19,6 +19,7 @@ contextBridge.exposeInMainWorld("web2desktop", {
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
   ping: () => ipcRenderer.invoke("ping"),
+  logPlugins: () => ipcRenderer.invoke("logPlugins"),
   // Subscribe to AppConfig updates pushed from the main process.
   onAppConfig: (func: (args: Partial<AppConfigInterface>) => void) => {
     const subscription = (_event: any, args: Partial<AppConfigInterface>) =>
@@ -34,32 +35,7 @@ contextBridge.exposeInMainWorld("web2desktop", {
   resetAppConfig: () => ipcRenderer.invoke("resetAppConfig"),
   // Request app quit.
   quitApp: () => ipcRenderer.invoke("quitApp"),
-  /** Steam */
-  steam: {
-    // One-shot Steam availability check.
-    isWorking: () => ipcRenderer.invoke("steam.isWorking") as Promise<boolean>,
-    // Read the local player's Steam name.
-    getName: () =>
-      ipcRenderer.invoke("steam.getName") as Promise<string | undefined>,
-    achievement: {
-      // Query achievement status.
-      isActivated: (achievement: string) =>
-        ipcRenderer.invoke(
-          "steam.achievement.isActivated",
-          achievement,
-        ) as Promise<boolean>,
-      // Activate an achievement and return the updated status.
-      activate: (achievement: string) =>
-        ipcRenderer.invoke(
-          "steam.achievement.activate",
-          achievement,
-        ) as Promise<boolean>,
-      // Clear (reset) an achievement and return the updated status.
-      clear: (achievement: string) =>
-        ipcRenderer.invoke(
-          "steam.achievement.clear",
-          achievement,
-        ) as Promise<boolean>,
-    },
-  },
+  // Invoke on custom plugins
+  invoke: (channel: string, args?: Record<string, any>) =>
+    ipcRenderer.invoke(channel, args),
 });

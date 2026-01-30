@@ -6,10 +6,12 @@
 
 import {
   app,
+  BaseWindow,
   BrowserWindow,
   globalShortcut,
   ipcMain,
   Menu,
+  MenuItem,
   screen,
   shell,
 } from "electron";
@@ -17,18 +19,15 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { AppConfigInterface } from "../types";
+import { getAllPlugins } from "../utils/pluginLoader";
 import { getData, setData } from "../utils/store";
 
 import { AppInfos } from "./appInfos";
-import { Steam } from "./steam";
 
 export class App {
   private window!: BrowserWindow;
 
-  constructor(
-    private appInfos: AppInfos,
-    private steam: Steam,
-  ) {}
+  constructor(private appInfos: AppInfos) {}
 
   createWindow() {
     // Main app window: size is based on the primary display work area.
@@ -54,14 +53,13 @@ export class App {
     global.mainWindow = this.window;
 
     // UI + lifecycle wiring.
-    this.setMenu();
+    this.setAppMenu();
     this.listeners();
     this.disableDevToolInProduction();
     this.openLinkInExternalBrowser();
 
     // Initialize feature modules after the window exists.
     this.appInfos.init();
-    this.steam.init();
   }
 
   private loadUrl() {
@@ -131,6 +129,7 @@ export class App {
         this.window.center();
       }, 100);
     });
+    ipcMain.handle("logPlugins", this.logPlugins);
   }
 
   private initBounds() {
@@ -167,35 +166,56 @@ export class App {
     });
   }
 
-  private setMenu() {
-    // Provide a minimal menu so copy/paste works.
-    let menu = Menu.buildFromTemplate([]);
-    menu = Menu.buildFromTemplate([
-      {
-        label: "App",
-        submenu: [
-          {
-            label: "Quit",
-            click: () => {
-              app.quit();
-            },
-          },
-        ],
-      },
-      {
-        label: "Edit",
-        submenu: [
-          { role: "undo" },
-          { role: "redo" },
-          { type: "separator" },
-          { role: "cut" },
-          { role: "copy" },
-          { role: "paste" },
-          { role: "selectAll" },
-        ],
-      },
-    ]);
+  private setAppMenu() {
+    const { config, isProduction } = global;
+    const allPlugins = getAllPlugins();
+    const handleClickMenuItem = (
+      menuItem: MenuItem,
+      _window: BaseWindow | undefined,
+      _event: KeyboardEvent,
+    ) => {
+      if (!menuItem.id) {
+        return;
+      }
+      allPlugins
+        .filter((plugin) => !!plugin.handleClickAppMenuItem)
+        .forEach((plugin) => {
+          plugin.handleClickAppMenuItem(menuItem.id);
+        });
+    };
+
+    const menu = Menu.buildFromTemplate(
+      (config.applicationMenu || [])
+        .filter(
+          (menu) => !(isProduction && menu.hideOnProduction) || !isProduction,
+        )
+        .map((menu) => ({
+          ...menu,
+          submenu: menu.submenu
+            .filter(
+              (subMenuItem) =>
+                !(isProduction && subMenuItem.hideOnProduction) ||
+                !isProduction,
+            )
+            .map((subMenuItem) => ({
+              ...subMenuItem,
+              click: handleClickMenuItem,
+            })),
+        })),
+    );
 
     Menu.setApplicationMenu(menu);
+  }
+
+  private logPlugins() {
+    const { web2desktopPlugins } = global;
+    const plugins: { plugin: string; channels: string[] }[] = [];
+    web2desktopPlugins.forEach((plugin, pluginName) => {
+      plugins.push({
+        plugin: pluginName,
+        channels: Array.from(plugin.handlers.keys()),
+      });
+    });
+    return plugins;
   }
 }
