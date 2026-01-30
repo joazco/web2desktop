@@ -7,6 +7,7 @@
 import { app, BrowserWindow, Menu } from "electron";
 import started from "electron-squirrel-startup";
 
+import config from "./config";
 import { App } from "./modules/app";
 import { AppInfos } from "./modules/appInfos";
 import { SplashScreen } from "./modules/splash";
@@ -17,7 +18,10 @@ if (started) {
   app.quit();
 }
 
+/** */
 global.isProduction = !!app.isPackaged;
+global.config = config;
+/** */
 
 /** Create modules */
 const splashWindow = new SplashScreen();

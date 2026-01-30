@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log(await window.web2desktop?.ping());
   // Receive AppConfigInterface updates from onAppConfig and reflect in UI.
   window.web2desktop?.onAppConfig((data) => {
-    console.log("🚀 ~ data:", data);
     setAppName(data.name);
     setForm(data);
   });

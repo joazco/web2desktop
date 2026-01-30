@@ -13,4 +13,6 @@ declare global {
   var mainWindow: BrowserWindow;
   // eslint-disable-next-line no-var
   var isProduction: boolean;
+  // eslint-disable-next-line no-var
+  var config: Omit<AppConfigInterface, "size">;
 }

@@ -16,7 +16,6 @@ import {
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-import config from "../config";
 import { AppConfigInterface } from "../types";
 import { getData, setData } from "../utils/store";
 
@@ -38,7 +37,7 @@ export class App {
     this.window = new BrowserWindow({
       width: width / 2,
       height: height / 1.5,
-      title: config.name,
+      title: global.config.name,
       center: true,
       fullscreenable: true,
       webPreferences: {
@@ -73,15 +72,17 @@ export class App {
           "..",
           "..",
           "www",
-          config.webSource?.prod?.target ?? "index.html",
+          global.config.webSource?.prod?.target ?? "index.html",
         ),
       );
+      return;
     }
+
     const {
       webSource: {
         dev: { mode, target },
       },
-    } = config;
+    } = global.config;
     if (!mode || !target) {
       this.window.loadFile(
         path.join(__dirname, "..", "..", "www", "index.html"),
@@ -145,7 +146,7 @@ export class App {
 
   private disableDevToolInProduction() {
     // Prevent opening DevTools in production when configured.
-    if (global.isProduction && config.disableOpenDevToolOnProduction) {
+    if (global.isProduction && global.config.disableOpenDevToolOnProduction) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       globalShortcut.register("CommandOrControl+Shift+I", () => {});
       // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -7,15 +7,13 @@
 import { ipcMain } from "electron";
 import * as steamworks from "steamworks.js";
 
-import config from "../config";
-
 export class Steam {
   private _client: ReturnType<typeof steamworks.init> | null = null;
 
   init() {
     // Initialize the Steamworks client (optional, based on config).
     try {
-      this._client = steamworks.init(config.steam?.appId);
+      this._client = steamworks.init(global.config.steam?.appId);
     } catch (e) {
       this._client = null;
     }

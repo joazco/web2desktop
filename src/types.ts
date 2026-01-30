@@ -79,11 +79,9 @@ export interface AppConfigInterface {
   disableOpenDevToolOnProduction?: boolean;
 }
 
-// Steam configuration.
+// Web Source Configuration
 export interface AppConfigInterface {
-  steam?: {
-    appId: number;
-  };
+  webSource?: WebSourceConfig;
 }
 
 // Build configuration.
@@ -91,9 +89,11 @@ export interface AppConfigInterface {
   build?: ForgeBuildInterface;
 }
 
-//
+// Steam configuration.
 export interface AppConfigInterface {
-  webSource?: WebSourceConfig;
+  steam?: {
+    appId: number;
+  };
 }
 
 /** */
