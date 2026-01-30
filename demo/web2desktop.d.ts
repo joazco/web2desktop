@@ -18,37 +18,28 @@ declare global {
       node: () => string;
       chrome: () => string;
       electron: () => string;
-      ping: () => "pong";
+      ping: () => Promise<"pong">;
       // Subscribe to AppConfig updates pushed from the main process.
-      onAppConfig: (func: (args: any) => void) => void;
+      onAppConfig: (func: (args: any) => void) => () => void;
       // Update app config from the renderer.
-      setAppConfig: (config: Partial<AppConfigInterface>) => void;
+      setAppConfig: (config: Partial<AppConfigInterface>) => Promise<void>;
       // Restore defaults config from config.ts.
-      resetAppConfig: () => void;
+      resetAppConfig: () => Promise<void>;
       // Request app quit.
-      quitApp: () => void;
+      quitApp: () => Promise<void>;
       /** Steam */
       steam: {
         // One-shot Steam availability check.
-        isWorking: (func: (isWorking: boolean) => void) => void;
+        isWorking: () => Promise<boolean>;
         // Read the local player's Steam name.
-        getName: (func: (name: string) => void) => void;
+        getName: () => Promise<string | undefined>;
         achievement: {
           // Query achievement status.
-          isActivated: (
-            achievement: string,
-            func: (isActivated: boolean) => void,
-          ) => void;
+          isActivated: (achievement: string) => Promise<boolean>;
           // Activate an achievement and return the updated status.
-          activate: (
-            achievement: string,
-            func: (isActivated: boolean) => void,
-          ) => void;
+          activate: (achievement: string) => Promise<boolean>;
           // Clear (reset) an achievement and return the updated status.
-          clear: (
-            achievement: string,
-            func: (isActivated: boolean) => void,
-          ) => void;
+          clear: (achievement: string) => Promise<boolean>;
         };
       };
     };

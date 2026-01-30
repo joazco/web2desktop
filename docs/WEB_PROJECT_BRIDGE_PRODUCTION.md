@@ -1,7 +1,20 @@
-# Bridge a Web Project to Web2Desktop
+# Bridge a Web Project to Web2Desktop on Production
 
 Web2Desktop loads everything inside the `www/` folder.  
 Your goal: **build your web project** so it outputs a static `index.html` plus its assets (JS/CSS/images), then **copy everything into `www/`**.
+
+If you want to load a different file in production (not `index.html`), you can override it in [`config.ts`](../src/config.ts):
+
+```ts
+const config: Omit<AppConfigInterface, "size"> = {
+  ....
+  webSource: {
+    prod: {
+      target: "custom.html",
+    },
+  },
+}
+```
 
 ## ✅ Quick checklist
 

@@ -6,6 +6,7 @@
 
 // Preload script: expose a safe, minimal API to the renderer.
 
+// eslint-disable-next-line import/no-unresolved
 import { contextBridge, ipcRenderer } from "electron/renderer";
 
 import { AppConfigInterface } from "./types";
@@ -19,9 +20,9 @@ contextBridge.exposeInMainWorld("web2desktop", {
   electron: () => process.versions.electron,
   ping: () => ipcRenderer.invoke("ping"),
   // Subscribe to AppConfig updates pushed from the main process.
-  onAppConfig: (func: (args: any) => void) => {
-    // @ts-ignore
-    const subscription = (_event: any, ...args: any) => func(...args);
+  onAppConfig: (func: (args: Partial<AppConfigInterface>) => void) => {
+    const subscription = (_event: any, args: Partial<AppConfigInterface>) =>
+      func(args);
     ipcRenderer.invoke("getAppConfig");
     ipcRenderer.on("appConfig", subscription);
     return () => ipcRenderer.removeListener("appConfig", subscription);

@@ -8,7 +8,6 @@
     "start": "electron-forge start",
     "build": "tsc -p .",
     "dev": "concurrently -k \"npm:dev:ts\" \"npm:dev:electron\"",
-    "dev:demo": "node scripts/sync-demo-to-www.js && npm run dev",
     "dev:ts": "tsc -w -p .",
     "dev:electron": "wait-on dist/main.js && nodemon --delay 200ms --watch dist --watch www --watch splash --ext js,json,html,css,png,jpg,svg --signal SIGTERM --exec \"electron-forge start\"",
     "package": "npm run build && electron-forge package",

@@ -3,7 +3,6 @@
  * https://github.com/joazco/web2desktop
  * © 2026 Jordan Azoulay — MIT License
  */
-
 import { AppConfigInterface } from "./types";
 
 const config: Omit<AppConfigInterface, "size"> = {
@@ -28,6 +27,15 @@ const config: Omit<AppConfigInterface, "size"> = {
   // steam: {
   //   appId: 123456,
   // },
+  webSource: {
+    prod: {
+      target: "index.html",
+    },
+    dev: {
+      mode: "file",
+      target: "./demo/index.html",
+    },
+  },
 };
 
 export default config;

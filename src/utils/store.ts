@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 /**
  * web2desktop
  * https://github.com/joazco/web2desktop
@@ -6,14 +8,12 @@
 
 import Store from "electron-store";
 
-const store = new Store();
+const store = new Store<Record<string, unknown>>();
 
 export const setData = (key: string, data: unknown) => {
-  // @ts-ignore
   store.set(key, data);
 };
 
 export const getData = <T = unknown>(key: string): T | undefined => {
-  // @ts-ignore
   return store.get(key) as T | undefined;
 };
