@@ -69,6 +69,7 @@ export class App {
       return "pong";
     });
     ipcMain.handle("quitApp", () => {
+      this.window.setClosable(true);
       this.window.close();
     });
     ipcMain.handle("getAppConfig", () => {

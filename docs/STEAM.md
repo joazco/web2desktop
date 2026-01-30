@@ -1,6 +1,6 @@
 # Steam (Base API)
 
-This document explains how to **check if Steam is available** and **retrieve the player’s display name**, without covering achievements.
+This document explains how to **check if Steam is available** and **retrieve the player's display name**, without covering achievements.
 
 This module relies on the [**steamworks.js**](https://github.com/ceifa/steamworks.js) library to communicate with Steam.
 
@@ -22,13 +22,12 @@ steam: {
 ## Check if Steam is available
 
 ```js
-window.web2desktop?.steam.isWorking((isWorking) => {
-  if (isWorking) {
-    console.log("Steam OK");
-  } else {
-    console.log("Steam OFF");
-  }
-});
+const isWorking = await window.web2desktop?.steam.isWorking();
+if (isWorking) {
+  console.log("Steam OK");
+} else {
+  console.log("Steam OFF");
+}
 ```
 
 ---
@@ -36,13 +35,12 @@ window.web2desktop?.steam.isWorking((isWorking) => {
 ## Get the player display name
 
 ```js
-window.web2desktop?.steam.getName((name) => {
-  if (name) {
-    console.log("Steam name:", name);
-  } else {
-    console.log("No name detected");
-  }
-});
+const name = await window.web2desktop?.steam.getName();
+if (name) {
+  console.log("Steam name:", name);
+} else {
+  console.log("No name detected");
+}
 ```
 
 ---
@@ -50,16 +48,14 @@ window.web2desktop?.steam.getName((name) => {
 ## Full example
 
 ```js
-window.web2desktop?.steam.isWorking((isWorking) => {
-  if (!isWorking) {
-    console.log("Steam OFF");
-    return;
-  }
+const isWorking = await window.web2desktop?.steam.isWorking();
+if (!isWorking) {
+  console.log("Steam OFF");
+  return;
+}
 
-  window.web2desktop?.steam.getName((name) => {
-    console.log("Steam name:", name ?? "-");
-  });
-});
+const name = await window.web2desktop?.steam.getName();
+console.log("Steam name:", name ?? "-");
 ```
 
 ---
