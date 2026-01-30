@@ -10,14 +10,6 @@
       "problemMatcher": []
     },
     {
-      "label": "dev:demo",
-      "type": "npm",
-      "script": "dev:demo",
-      "detail": "Syncs demo -> www, then starts dev mode.",
-      "isBackground": true,
-      "problemMatcher": []
-    },
-    {
       "label": "make",
       "type": "npm",
       "script": "make",

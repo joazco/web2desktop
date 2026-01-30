@@ -14,6 +14,7 @@ import {
   shell,
 } from "electron";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import config from "../config";
 import { AppConfigInterface } from "../types";
@@ -49,7 +50,8 @@ export class App {
     this.initBounds();
 
     // Load the renderer UI from /www.
-    this.window.loadFile(path.join(__dirname, "..", "..", "www", "index.html"));
+    this.loadUrl();
+
     global.mainWindow = this.window;
 
     // UI + lifecycle wiring.
@@ -61,6 +63,43 @@ export class App {
     // Initialize feature modules after the window exists.
     this.appInfos.init();
     this.steam.init();
+  }
+
+  private loadUrl() {
+    if (global.isProduction) {
+      this.window.loadFile(
+        path.join(
+          __dirname,
+          "..",
+          "..",
+          "www",
+          config.webSource?.prod?.target ?? "index.html",
+        ),
+      );
+    }
+    const {
+      webSource: {
+        dev: { mode, target },
+      },
+    } = config;
+    if (!mode || !target) {
+      this.window.loadFile(
+        path.join(__dirname, "..", "..", "www", "index.html"),
+      );
+    }
+    switch (mode) {
+      case "file": {
+        const fileUrl = pathToFileURL(target).toString();
+        this.window.loadURL(fileUrl);
+        break;
+      }
+      case "http":
+        this.window.loadURL(target);
+        break;
+      case "www":
+      default:
+        this.window.loadFile(path.join(__dirname, "..", "..", "www", target));
+    }
   }
 
   private listeners() {
@@ -107,8 +146,11 @@ export class App {
   private disableDevToolInProduction() {
     // Prevent opening DevTools in production when configured.
     if (global.isProduction && config.disableOpenDevToolOnProduction) {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       globalShortcut.register("CommandOrControl+Shift+I", () => {});
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       globalShortcut.register("F12", () => {});
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       globalShortcut.register("CommandOrControl+Alt+I", () => {});
       this.window.webContents.on("devtools-opened", () => {
         this.window.webContents.closeDevTools();
