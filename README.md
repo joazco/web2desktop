@@ -11,20 +11,22 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 1. Getting started
    - [Installation](./docs/INSTALLATION.md)
    - [Configuration](./docs/CONFIGURATION.md)
-   - [Bridge a Web Project](./docs/WEB_PROJECT_BRIDGE.md)
-2. Window & API
+2. Bridge a Web Project
+   - [Development](./docs/WEB_PROJECT_BRIDGE_DEVELOPMENT.md)
+   - [Production](./docs/WEB_PROJECT_BRIDGE_PRODUCTION.md)
+3. Window & API
    - [Control Window (Preload API)](./docs/CONTROL_WINDOW.md)
    - [TypeScript typings](./docs/TYPESCRIPT.md)
-3. Assets
+4. Assets
    - [Icons & Splash](./docs/ICONS.md)
-4. Steam
-   - [Steam basics](./docs/STEAM.md)
-   - [Achievements](./docs/ACHIEVEMENTS.md)
 5. Build & packaging
    - [Build and Make](./docs/BUILD_AND_MAKE.md)
    - [Windows](./docs/BUILD_WINDOWS.md)
    - [macOS](./docs/BUILD_MACOS.md)
    - [Linux](./docs/BUILD_LINUX.md)
+6. Steam
+   - [Steam basics](./docs/STEAM.md)
+   - [Achievements](./docs/STEAM_ACHIEVEMENTS.md)
 
 ---
 

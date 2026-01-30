@@ -31,15 +31,15 @@ git pull upstream main --no-rebase
 
 #### Option B — GitHub fork
 
-1) Fork the repo on GitHub.  
-2) Clone your fork:
+1. Fork the repo on GitHub.
+2. Clone your fork:
 
 ```sh
 git clone https://github.com/{your-user}/web2desktop.git
 cd web2desktop
 ```
 
-3) Add the official remote to pull updates:
+3. Add the official remote to pull updates:
 
 ```sh
 git remote add upstream https://github.com/joazco/web2desktop.git
@@ -59,5 +59,5 @@ From the project directory:
 ```sh
 npm install
 # Verify everything works
-npm run dev:demo
+npm run dev
 ```

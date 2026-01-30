@@ -17,6 +17,8 @@ if (started) {
   app.quit();
 }
 
+global.isProduction = !!app.isPackaged;
+
 /** Create modules */
 const splashWindow = new SplashScreen();
 const appInfos = new AppInfos();
@@ -45,5 +47,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-global.isProduction = !!app.isPackaged;

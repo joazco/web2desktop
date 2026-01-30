@@ -24,17 +24,29 @@ export class Steam {
     ipcMain.handle("steam.isWorking", () => this._client !== null);
 
     // Read the local player's Steam name.
-    ipcMain.handle("steam.getName", () => this._client?.localplayer.getName());
+    ipcMain.handle("steam.getName", () => {
+      if (!this._client) {
+        throw new Error("Steam is'nt working");
+      }
+      return this._client.localplayer.getName();
+    });
 
     // Query achievement status.
     ipcMain.handle(
       "steam.achievement.isActivated",
-      (_, achievement: string) =>
-        !!this._client?.achievement.isActivated(achievement),
+      (_, achievement: string) => {
+        if (!this._client) {
+          throw new Error("Steam is'nt working");
+        }
+        return !!this._client?.achievement.isActivated(achievement);
+      },
     );
 
     // Activate the achievement if not already unlocked.
     ipcMain.handle("steam.achievement.activate", (_, achievement: string) => {
+      if (!this._client) {
+        throw new Error("Steam is'nt working");
+      }
       let isActivated = !!this._client?.achievement.isActivated(achievement);
       if (!isActivated) {
         this._client?.achievement.activate(achievement);
@@ -45,6 +57,9 @@ export class Steam {
 
     // Clear (reset) the achievement.
     ipcMain.handle("steam.achievement.clear", (_, achievement: string) => {
+      if (!this._client) {
+        throw new Error("Steam is'nt working");
+      }
       this._client?.achievement.clear(achievement);
       return !!this._client?.achievement.isActivated(achievement);
     });

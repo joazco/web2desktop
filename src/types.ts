@@ -1,3 +1,5 @@
+/* eslint-disable import/export */
+
 /**
  * web2desktop
  * https://github.com/joazco/web2desktop
@@ -44,6 +46,18 @@ export interface ForgeBuildInterface {
   };
 }
 
+/** WebSourceConfig */
+
+export interface WebSourceConfig {
+  prod?: {
+    target?: string; //  you can target only file into www, default: "index.html"
+  };
+  dev?: {
+    mode: "www" | "http" | "file";
+    target: string; // ex: "index.html" / "http://localhost:3000" / "./demo/index.html" / absolut or local path
+  };
+}
+
 /** interface AppConfigInterface */
 
 // App-initialized config that the UI can change.
@@ -75,6 +89,11 @@ export interface AppConfigInterface {
 // Build configuration.
 export interface AppConfigInterface {
   build?: ForgeBuildInterface;
+}
+
+//
+export interface AppConfigInterface {
+  webSource?: WebSourceConfig;
 }
 
 /** */
