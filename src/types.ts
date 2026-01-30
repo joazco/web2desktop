@@ -9,7 +9,7 @@
 import { MakerDebConfig } from "@electron-forge/maker-deb";
 import { MakerSquirrelConfig } from "@electron-forge/maker-squirrel";
 import type { ForgeConfig } from "@electron-forge/shared-types";
-import { BrowserWindow } from "electron";
+import { BrowserWindow, MenuItemConstructorOptions } from "electron";
 
 /** interface ForgeBuildInterface */
 export interface ForgeBuildInterface {
@@ -80,6 +80,25 @@ export interface AppConfigInterface {
 }
 
 // Web Source Configuration
+type AppConfigInterfaceApplicationMenuItem = {
+  id?: string; // If the ID is not entered, it will not be possible to catch the click event
+  label?: string;
+  role?: MenuItemConstructorOptions["role"];
+  submenu?: AppConfigInterfaceApplicationMenuItem[];
+  hideOnProduction?: boolean;
+  type?: "normal" | "separator"; // default normal
+  accelerator?: string;
+};
+type AppConfigInterfaceApplicationMenu = {
+  label: string;
+  submenu: AppConfigInterfaceApplicationMenuItem[];
+  hideOnProduction?: boolean;
+};
+export interface AppConfigInterface {
+  applicationMenu?: AppConfigInterfaceApplicationMenu[];
+}
+
+// Menu Configuration
 export interface AppConfigInterface {
   webSource?: WebSourceConfig;
 }
@@ -89,11 +108,19 @@ export interface AppConfigInterface {
   build?: ForgeBuildInterface;
 }
 
-// Steam configuration.
+// Plugin configuration.
 export interface AppConfigInterface {
-  steam?: {
-    appId: number;
-  };
+  plugins?: Record<string, any>;
 }
 
-/** */
+/** Web2DesktopPluginInterface */
+export interface Web2DesktopPluginInterface<T = unknown> {
+  readonly pluginName: string;
+  readonly handlers: Map<
+    string,
+    (event: Electron.IpcMainInvokeEvent, args?: Record<string, any>) => any
+  >;
+  config?: T;
+  init: () => void;
+  handleClickAppMenuItem?: (id: string) => void;
+}

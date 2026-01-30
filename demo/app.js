@@ -112,6 +112,11 @@ const setAppName = (appName) => {
 document.addEventListener("DOMContentLoaded", async () => {
   // Optional Electron bridge: ping returns "pong" per web2desktop.d.ts.
   console.log(await window.web2desktop?.ping());
+
+  // Log plugins and channels
+  window.web2desktop?.logPlugins().then((plugins) => {
+    console.log("Plugins:", plugins);
+  });
   // Receive AppConfigInterface updates from onAppConfig and reflect in UI.
   window.web2desktop?.onAppConfig((data) => {
     setAppName(data.name);

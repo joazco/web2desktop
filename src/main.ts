@@ -8,10 +8,9 @@ import { app, BrowserWindow, Menu } from "electron";
 import started from "electron-squirrel-startup";
 
 import config from "./config";
-import { App } from "./modules/app";
-import { AppInfos } from "./modules/appInfos";
-import { SplashScreen } from "./modules/splash";
-import { Steam } from "./modules/steam";
+import { App } from "./core/app";
+import { AppInfos } from "./core/appInfos";
+import { SplashScreen } from "./core/splash";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -21,13 +20,13 @@ if (started) {
 /** */
 global.isProduction = !!app.isPackaged;
 global.config = config;
+global.web2desktopPlugins = new Map();
 /** */
 
-/** Create modules */
+/** Create cores */
 const splashWindow = new SplashScreen();
 const appInfos = new AppInfos();
-const steam = new Steam();
-const appWindow = new App(appInfos, steam);
+const appWindow = new App(appInfos);
 
 const createWindow = async () => {
   await splashWindow.createWindow();

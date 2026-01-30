@@ -6,6 +6,8 @@
 
 import { BrowserWindow } from "electron";
 
+import { AppConfigInterface, Web2DesktopPluginInterface } from "./types";
+
 export {};
 
 declare global {
@@ -15,4 +17,6 @@ declare global {
   var isProduction: boolean;
   // eslint-disable-next-line no-var
   var config: Omit<AppConfigInterface, "size">;
+  // eslint-disable-next-line no-var
+  var web2desktopPlugins: Map<string, Web2DesktopPluginInterface>;
 }

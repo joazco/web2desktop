@@ -34,8 +34,10 @@ const checkIfIsActive = async () => {
     return;
   }
   try {
-    const isActivated =
-      await window.web2desktop?.steam.achievement.isActivated(achievementId);
+    const isActivated = await window.web2desktop?.invoke(
+      "steam.achievement.isActivated",
+      { achievementId },
+    );
     achievementStatus.textContent = isActivated ? "YES" : "NO";
   } catch (err) {
     achievementStatus.textContent = "Steam OFF";
@@ -60,8 +62,10 @@ const activateAchievement = async () => {
     return;
   }
   try {
-    const isActivated =
-      await window.web2desktop?.steam.achievement.activate(achievementId);
+    const isActivated = window.web2desktop?.invoke(
+      "steam.achievement.activate",
+      { achievementId },
+    );
     achievementStatus.textContent = isActivated ? "YES" : "NO";
   } catch (err) {
     achievementStatus.textContent = "Steam OFF";
@@ -86,8 +90,12 @@ const clearAchievement = async () => {
     return;
   }
   try {
-    const isActivated =
-      await window.web2desktop?.steam.achievement.clear(achievementId);
+    const isActivated = await window.web2desktop?.invoke(
+      "steam.achievement.clear",
+      {
+        achievementId,
+      },
+    );
     achievementStatus.textContent = isActivated ? "YES" : "NO";
   } catch (err) {
     achievementStatus.textContent = "Steam OFF";
@@ -99,10 +107,11 @@ const clearAchievement = async () => {
 document.addEventListener("DOMContentLoaded", async () => {
   // Fetch initial Steam state and gamer name.
   try {
-    steamIsWorking = (await window.web2desktop?.steam.isWorking()) ?? false;
+    steamIsWorking =
+      (await window.web2desktop?.invoke("steam.isWorking")) ?? false;
     if (steamIsWorking) {
       document.getElementById("steam-is-working").textContent = "YES";
-      const name = await window.web2desktop?.steam.getName();
+      const name = await window.web2desktop?.invoke("steam.getName");
       if (name) {
         document.getElementById("steam-gamer-name").textContent = name;
       } else {
