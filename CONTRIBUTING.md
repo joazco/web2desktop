@@ -67,7 +67,7 @@ npm install
 ### Development mode
 
 ```bash
-npm run dev:demo
+npm run dev
 ```
 
 This starts:
