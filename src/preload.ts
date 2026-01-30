@@ -6,10 +6,11 @@
 
 // Preload script: expose a safe, minimal API to the renderer.
 
+import { contextBridge, ipcRenderer } from "electron/renderer";
+
 import { AppConfigInterface } from "./types";
 
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-const { contextBridge, ipcRenderer } = require("electron/renderer");
 
 // The renderer calls window.electron.* (no direct Node access).
 contextBridge.exposeInMainWorld("web2desktop", {
@@ -35,74 +36,29 @@ contextBridge.exposeInMainWorld("web2desktop", {
   /** Steam */
   steam: {
     // One-shot Steam availability check.
-    isWorking: (func: (isWorking: boolean) => void) => {
-      // @ts-ignore
-      const subscription = (_event: any, ...args: any) => func(...args);
-      ipcRenderer.invoke("steam.isWorking");
-      ipcRenderer.on("steam.isWorking", (event: any, isWorking: boolean) => {
-        subscription(event, isWorking);
-        ipcRenderer.removeListener("steam.isWorking", subscription);
-      });
-    },
+    isWorking: () => ipcRenderer.invoke("steam.isWorking") as Promise<boolean>,
     // Read the local player's Steam name.
-    getName: (func: (name: string) => void) => {
-      // @ts-ignore
-      const subscription = (_event: any, ...args: any) => func(...args);
-      ipcRenderer.invoke("steam.getName");
-      ipcRenderer.on("steam.getName", (event: any, name: string) => {
-        subscription(event, name);
-        ipcRenderer.removeListener("steam.getName", subscription);
-      });
-    },
+    getName: () =>
+      ipcRenderer.invoke("steam.getName") as Promise<string | undefined>,
     achievement: {
       // Query achievement status.
-      isActivated: (
-        achievement: string,
-        func: (isActivated: boolean) => void,
-      ) => {
-        // @ts-ignore
-        const subscription = (_event: any, ...args: any) => func(...args);
-        ipcRenderer.invoke("steam.achievement.isActivated", achievement);
-        ipcRenderer.on(
+      isActivated: (achievement: string) =>
+        ipcRenderer.invoke(
           "steam.achievement.isActivated",
-          (event: any, isActivated: boolean) => {
-            subscription(event, isActivated);
-            ipcRenderer.removeListener(
-              "steam.achievement.isActivated",
-              subscription,
-            );
-          },
-        );
-      },
+          achievement,
+        ) as Promise<boolean>,
       // Activate an achievement and return the updated status.
-      activate: (achievement: string, func: (isActivated: boolean) => void) => {
-        // @ts-ignore
-        const subscription = (_event: any, ...args: any) => func(...args);
-        ipcRenderer.invoke("steam.achievement.activate", achievement);
-        ipcRenderer.on(
+      activate: (achievement: string) =>
+        ipcRenderer.invoke(
           "steam.achievement.activate",
-          (event: any, isActivated: boolean) => {
-            subscription(event, isActivated);
-            ipcRenderer.removeListener(
-              "steam.achievement.activate",
-              subscription,
-            );
-          },
-        );
-      },
+          achievement,
+        ) as Promise<boolean>,
       // Clear (reset) an achievement and return the updated status.
-      clear: (achievement: string, func: (isActivated: boolean) => void) => {
-        // @ts-ignore
-        const subscription = (_event: any, ...args: any) => func(...args);
-        ipcRenderer.invoke("steam.achievement.clear", achievement);
-        ipcRenderer.on(
+      clear: (achievement: string) =>
+        ipcRenderer.invoke(
           "steam.achievement.clear",
-          (event: any, isActivated: boolean) => {
-            subscription(event, isActivated);
-            ipcRenderer.removeListener("steam.achievement.clear", subscription);
-          },
-        );
-      },
+          achievement,
+        ) as Promise<boolean>,
     },
   },
 });

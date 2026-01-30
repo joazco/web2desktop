@@ -25,27 +25,26 @@ steam: {
 ```js
 const achievementId = "START_ADVENTURE";
 
-window.web2desktop?.steam.achievement.isActivated(
+const isActivated = await window.web2desktop?.steam.achievement.isActivated(
   achievementId,
-  (isActivated) => {
-    console.log("Unlocked?", isActivated);
-  },
 );
+console.log("Unlocked?", isActivated);
 ```
 
 ---
 
 ## Unlock an achievement
 
-If the player already unlocked the achievement, this call won’t unlock it again.  
-So you don’t need to check with `isActivated()` if your goal is simply to unlock it for the player.
+If the player already unlocked the achievement, this call won't unlock it again.  
+So you don't need to check with `isActivated()` if your goal is simply to unlock it for the player.
 
 ```js
 const achievementId = "START_ADVENTURE";
 
-window.web2desktop?.steam.achievement.activate(achievementId, (isActivated) => {
-  console.log("Unlocked after call?", isActivated);
-});
+const isActivated = await window.web2desktop?.steam.achievement.activate(
+  achievementId,
+);
+console.log("Unlocked after call?", isActivated);
 ```
 
 ---
@@ -55,9 +54,10 @@ window.web2desktop?.steam.achievement.activate(achievementId, (isActivated) => {
 ```js
 const achievementId = "START_ADVENTURE";
 
-window.web2desktop?.steam.achievement.clear(achievementId, (isActivated) => {
-  console.log("Unlocked after clear?", isActivated);
-});
+const isActivated = await window.web2desktop?.steam.achievement.clear(
+  achievementId,
+);
+console.log("Unlocked after clear?", isActivated);
 ```
 
 ---
@@ -67,16 +67,16 @@ window.web2desktop?.steam.achievement.clear(achievementId, (isActivated) => {
 ```js
 const achievementId = "START_ADVENTURE";
 
-window.web2desktop?.steam.isWorking((isWorking) => {
-  if (!isWorking) {
-    console.log("Steam OFF");
-    return;
-  }
+const isWorking = await window.web2desktop?.steam.isWorking();
+if (!isWorking) {
+  console.log("Steam OFF");
+  return;
+}
 
-  window.web2desktop?.steam.achievement.activate(achievementId, (updated) => {
-    console.log("Unlocked after activation?", updated);
-  });
-});
+const updated = await window.web2desktop?.steam.achievement.activate(
+  achievementId,
+);
+console.log("Unlocked after activation?", updated);
 ```
 
 ---

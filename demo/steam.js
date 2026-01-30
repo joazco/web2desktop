@@ -7,7 +7,7 @@
 let steamIsWorking = false;
 
 // Query Steam for achievement status and update the UI.
-const checkIfIsActive = () => {
+const checkIfIsActive = async () => {
   const achievementInput = document.getElementById("steam-achievement");
   const achievementStatus = document.getElementById(
     "steam-achievement-is-activated",
@@ -22,16 +22,13 @@ const checkIfIsActive = () => {
     achievementStatus.textContent = "Steam OFF";
     return;
   }
-  window.web2desktop?.steam.achievement.isActivated(
-    achievementId,
-    (isActivated) => {
-      achievementStatus.textContent = isActivated ? "YES" : "NO";
-    },
-  );
+  const isActivated =
+    await window.web2desktop?.steam.achievement.isActivated(achievementId);
+  achievementStatus.textContent = isActivated ? "YES" : "NO";
 };
 
 // Activate the achievement, then update the status display.
-const activateAchievement = () => {
+const activateAchievement = async () => {
   const achievementInput = document.getElementById("steam-achievement");
   const achievementStatus = document.getElementById(
     "steam-achievement-is-activated",
@@ -46,16 +43,13 @@ const activateAchievement = () => {
     achievementStatus.textContent = "Steam OFF";
     return;
   }
-  window.web2desktop?.steam.achievement.activate(
-    achievementId,
-    (isActivated) => {
-      achievementStatus.textContent = isActivated ? "YES" : "NO";
-    },
-  );
+  const isActivated =
+    await window.web2desktop?.steam.achievement.activate(achievementId);
+  achievementStatus.textContent = isActivated ? "YES" : "NO";
 };
 
 // Clear (reset) the achievement, then update the status display.
-const clearAchievement = () => {
+const clearAchievement = async () => {
   const achievementInput = document.getElementById("steam-achievement");
   const achievementStatus = document.getElementById(
     "steam-achievement-is-activated",
@@ -70,31 +64,28 @@ const clearAchievement = () => {
     achievementStatus.textContent = "Steam OFF";
     return;
   }
-  window.web2desktop?.steam.achievement.clear(achievementId, (isActivated) => {
-    achievementStatus.textContent = isActivated ? "YES" : "NO";
-  });
+  const isActivated =
+    await window.web2desktop?.steam.achievement.clear(achievementId);
+  achievementStatus.textContent = isActivated ? "YES" : "NO";
 };
 
 // Initialize the demo steam UI once the DOM is ready.
 document.addEventListener("DOMContentLoaded", async () => {
   // Fetch initial Steam state and gamer name.
-  window.web2desktop?.steam.isWorking((isWorking) => {
-    steamIsWorking = isWorking;
-    if (isWorking) {
-      document.getElementById("steam-is-working").textContent = "YES";
-      window.web2desktop?.steam.getName((name) => {
-        if (name) {
-          document.getElementById("steam-gamer-name").textContent = name;
-        } else {
-          document.getElementById("steam-gamer-name").textContent = "-";
-        }
-      });
+  steamIsWorking = (await window.web2desktop?.steam.isWorking()) ?? false;
+  if (steamIsWorking) {
+    document.getElementById("steam-is-working").textContent = "YES";
+    const name = await window.web2desktop?.steam.getName();
+    if (name) {
+      document.getElementById("steam-gamer-name").textContent = name;
     } else {
-      document.getElementById("steam-is-working").textContent = "NO";
       document.getElementById("steam-gamer-name").textContent = "-";
     }
-    checkIfIsActive();
-  });
+  } else {
+    document.getElementById("steam-is-working").textContent = "NO";
+    document.getElementById("steam-gamer-name").textContent = "-";
+  }
+  await checkIfIsActive();
 
   // Check status when the input loses focus.
   document.getElementById("steam-achievement")?.addEventListener("blur", () => {
