@@ -13,6 +13,15 @@ const config: Omit<AppConfigInterface, "size"> = {
   closable: true,
   openDevtools: true,
   disableOpenDevToolOnProduction: true,
+  webSource: {
+    prod: {
+      target: "index.html",
+    },
+    dev: {
+      mode: "file",
+      target: "./demo/index.html",
+    },
+  },
   build: {
     appBundleId: "com.joazco.web2desktop",
     version: "1.0.0",
@@ -27,15 +36,6 @@ const config: Omit<AppConfigInterface, "size"> = {
   // steam: {
   //   appId: 123456,
   // },
-  webSource: {
-    prod: {
-      target: "index.html",
-    },
-    dev: {
-      mode: "file",
-      target: "./demo/index.html",
-    },
-  },
 };
 
 export default config;
