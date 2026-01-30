@@ -39,6 +39,8 @@ out/make
 ## Notes
 
 - The format depends on your configuration ([`src/config.ts`](../src/config.ts)).
+- You can override the Forge config by creating a `forge.config.local.json`.
+  ⚠️ Be careful: it **overwrites** the Forge config, so any missing fields will be lost.
 - By default, **the ZIP maker is enabled** on all platforms.
 - Other makers (Squirrel, DMG, Deb/RPM, etc.) must be added in [`src/config.ts`](../src/config.ts).
 - Enabled makers determine which files are generated.
