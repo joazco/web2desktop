@@ -21,9 +21,9 @@ contextBridge.exposeInMainWorld("web2desktop", {
   ping: () => ipcRenderer.invoke("ping"),
   logPlugins: () => ipcRenderer.invoke("logPlugins"),
   // Subscribe to AppConfig updates pushed from the main process.
-  onAppConfig: (func: (args: Partial<AppConfigInterface>) => void) => {
+  onAppConfig: (callback: (args: Partial<AppConfigInterface>) => void) => {
     const subscription = (_event: any, args: Partial<AppConfigInterface>) =>
-      func(args);
+      callback(args);
     ipcRenderer.invoke("getAppConfig");
     ipcRenderer.on("appConfig", subscription);
     return () => ipcRenderer.removeListener("appConfig", subscription);

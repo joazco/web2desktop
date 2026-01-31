@@ -12,10 +12,12 @@ import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import type { ForgeConfig } from "@electron-forge/shared-types";
-import fs from "node:fs";
 import path from "node:path";
 
-import appConfig from "./src/config";
+import configLocal from "./forge.config.local.json";
+import { deepMerge, loadConfig } from "./src/utils/config";
+
+const appConfig = loadConfig();
 
 const config: ForgeConfig = {
   buildIdentifier: appConfig.build?.appBundleId,
@@ -152,32 +154,10 @@ if (config.makers && appConfig.build?.linux?.makers?.includes("rpm")) {
   );
 }
 
-function deepMerge<T>(target: T, source: any): T {
-  if (!source) return target;
-
-  for (const key of Object.keys(source)) {
-    const sv = source[key];
-    const tv = (target as any)[key];
-
-    if (Array.isArray(sv)) {
-      (target as any)[key] = sv;
-    } else if (sv && typeof sv === "object" && tv && typeof tv === "object") {
-      (target as any)[key] = deepMerge({ ...tv }, sv);
-    } else {
-      (target as any)[key] = sv;
-    }
-  }
-  return target;
-}
-
-const localPath = path.join(__dirname, "forge.config.local.json");
-
 let finalConfig = config;
 
-if (fs.existsSync(localPath)) {
-  const raw = fs.readFileSync(localPath, "utf-8");
-  const local = JSON.parse(raw);
-  finalConfig = deepMerge({ ...config }, local);
+if (configLocal) {
+  finalConfig = deepMerge(config, configLocal);
 }
 
 export default finalConfig;

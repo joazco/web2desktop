@@ -7,7 +7,7 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
 
-import { loadPlugins } from "../utils/pluginLoader";
+import { loadPlugins } from "../utils/plugins";
 
 export class SplashScreen {
   createWindow(): Promise<void> {

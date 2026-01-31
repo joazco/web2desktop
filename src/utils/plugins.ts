@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import fs, { glob } from "node:fs";
+import fs from "node:fs";
 import path from "node:path";
 
 import type { Web2DesktopPluginInterface } from "../types";
@@ -35,7 +35,10 @@ export async function loadPlugins(pluginsDir: string) {
       if (!candidate) continue;
 
       const plugin = new candidate() as Web2DesktopPluginInterface;
-      plugin.config = global.config.plugins[plugin.pluginName];
+      const config = global.config.plugins
+        ? global.config.plugins[plugin.pluginName]
+        : undefined;
+      plugin.config = config;
       plugin.init();
       plugin.handlers.forEach((handler, channel) => {
         ipcMain.handle(channel, handler);

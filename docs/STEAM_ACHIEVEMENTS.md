@@ -25,8 +25,9 @@ steam: {
 ```js
 const achievementId = "START_ADVENTURE";
 
-const isActivated = await window.web2desktop?.steam.achievement.isActivated(
-  achievementId,
+const isActivated = await window.web2desktop?.invoke(
+  "steam.achievement.isActivated",
+  { achievementId },
 );
 console.log("Unlocked?", isActivated);
 ```
@@ -41,8 +42,9 @@ So you don't need to check with `isActivated()` if your goal is simply to unlock
 ```js
 const achievementId = "START_ADVENTURE";
 
-const isActivated = await window.web2desktop?.steam.achievement.activate(
-  achievementId,
+const isActivated = await window.web2desktop?.invoke(
+  "steam.achievement.activate",
+  { achievementId },
 );
 console.log("Unlocked after call?", isActivated);
 ```
@@ -54,8 +56,11 @@ console.log("Unlocked after call?", isActivated);
 ```js
 const achievementId = "START_ADVENTURE";
 
-const isActivated = await window.web2desktop?.steam.achievement.clear(
-  achievementId,
+const isActivated = await window.web2desktop?.invoke(
+  "steam.achievement.clear",
+  {
+    achievementId,
+  },
 );
 console.log("Unlocked after clear?", isActivated);
 ```
@@ -67,15 +72,15 @@ console.log("Unlocked after clear?", isActivated);
 ```js
 const achievementId = "START_ADVENTURE";
 
-const isWorking = await window.web2desktop?.steam.isWorking();
+const isWorking = await window.web2desktop?.invoke("steam.isWorking");
 if (!isWorking) {
   console.log("Steam OFF");
   return;
 }
 
-const updated = await window.web2desktop?.steam.achievement.activate(
+const updated = await window.web2desktop?.invoke("steam.achievement.activate", {
   achievementId,
-);
+});
 console.log("Unlocked after activation?", updated);
 ```
 

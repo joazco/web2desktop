@@ -7,10 +7,10 @@
 import { app, BrowserWindow, Menu } from "electron";
 import started from "electron-squirrel-startup";
 
-import config from "./config";
 import { App } from "./core/app";
 import { AppInfos } from "./core/appInfos";
 import { SplashScreen } from "./core/splash";
+import { loadConfig } from "./utils/config";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -19,7 +19,7 @@ if (started) {
 
 /** */
 global.isProduction = !!app.isPackaged;
-global.config = config;
+global.config = loadConfig();
 global.web2desktopPlugins = new Map();
 /** */
 

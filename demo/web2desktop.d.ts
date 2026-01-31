@@ -26,7 +26,7 @@ declare global {
         }[]
       >;
       // Subscribe to AppConfig updates pushed from the main process.
-      onAppConfig: (func: (args: any) => void) => () => void;
+      onAppConfig: (callback: (args: any) => void) => () => void;
       // Update app config from the renderer.
       setAppConfig: (config: Partial<AppConfigInterface>) => Promise<void>;
       // Restore defaults config from config.ts.

@@ -19,7 +19,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { AppConfigInterface } from "../types";
-import { getAllPlugins } from "../utils/pluginLoader";
+import { getAllPlugins } from "../utils/plugins";
 import { getData, setData } from "../utils/store";
 
 import { AppInfos } from "./appInfos";
