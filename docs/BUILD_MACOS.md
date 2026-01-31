@@ -1,20 +1,20 @@
 # Build macOS
 
-Ce document explique comment fonctionne le build d’une application `.app` et d’un installeur DMG sous macOS.
+This document explains how the build of a `.app` and a DMG installer works on macOS.
 
 ## Makers
 
 ### Zip
 
-Par défaut sur macOS, la commande `npm run make` génère un fichier `.zip` dans le dossier `out/make` contenant tout ce qui est nécessaire pour lancer l’application `.app`.
+By default on macOS, the `npm run make` command generates a `.zip` file in the `out/make` folder containing everything needed to launch the `.app`.
 
 ### DMG
 
-Vous pouvez vous référer à la [documentation DMG](https://www.electronforge.io/config/makers/dmg).
+You can refer to the [DMG documentation](https://www.electronforge.io/config/makers/dmg).
 
-#### Activation
+#### Enable
 
-Afin de créer un installeur DMG, Web2Desktop propose le maker DMG qu’**il faut activer** dans le fichier [src/config.ts](../src/config.ts).
+To create a DMG installer, Web2Desktop provides a DMG maker that you **must enable** in [src/config.ts](../src/config.ts).
 
 ```typescript
 /**
@@ -36,12 +36,12 @@ const config: Omit<AppConfigInterface, "size"> = {
 }
 ```
 
-#### Signature
+#### Signing
 
-> Pour savoir comment créer un certificat, un identifiant et un mot de passe Apple, vous pouvez vous référer à la [documentation Electron Forge](https://www.electronforge.io/guides/code-signing/code-signing-macos) et à la [documentation Electron](https://www.electronjs.org/fr/docs/latest/tutorial/code-signing).  
-> Il est nécessaire d’avoir un compte Apple Developer et de suivre les étapes indiquées pour obtenir les informations afin de signer votre application officiellement.
+> To learn how to create a certificate, an identifier, and an Apple password, refer to the [Electron Forge documentation](https://www.electronforge.io/guides/code-signing/code-signing-macos) and the [Electron documentation](https://www.electronjs.org/fr/docs/latest/tutorial/code-signing).  
+> You need an Apple Developer account and must follow the steps to obtain the information required to sign your application officially.
 
-Pour signer et notariser votre application, il vous faut ajouter dans [src/config.ts](../src/config.ts) vos informations Apple :
+To sign and notarize your application, add your Apple information to [src/config.ts](../src/config.ts):
 
 ```typescript
 /**
@@ -69,7 +69,7 @@ const config: Omit<AppConfigInterface, "size"> = {
 }
 ```
 
-### Fichier Entitlements
+### Entitlements file
 
-Un fichier [`entitlements.mac.plist`](../resources/apple/entitlements.mac.plist) est fourni par défaut dans Web2Desktop. Vous pouvez le modifier dans le dossier `resources/apple`.  
-Référez-vous à la [documentation Apple](https://developer.apple.com/documentation/bundleresources/entitlements).
+A default [`entitlements.mac.plist`](../resources/apple/entitlements.mac.plist) file is provided in Web2Desktop. You can edit it in the `resources/apple` folder.  
+Refer to the [Apple documentation](https://developer.apple.com/documentation/bundleresources/entitlements).

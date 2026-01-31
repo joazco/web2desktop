@@ -87,5 +87,5 @@ console.log(window.web2desktop?.electron()); // Electron version
 ## Important notes
 
 - All calls are optional (`?.`) to avoid errors if the API is unavailable.
-- Valid values are defined in `src/types.ts` (see `AppConfigInterface`).
+- Valid values are defined in [`src/types.ts`](../src/types.ts) (see `AppConfigInterface`).
 - If `disableOpenDevToolOnProduction` is enabled, DevTools may be blocked in production.
