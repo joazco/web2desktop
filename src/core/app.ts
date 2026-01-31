@@ -104,7 +104,7 @@ export class App {
   private listeners() {
     // IPC handlers used by the preload bridge.
     ipcMain.handle("ping", () => {
-      return "pong";
+      return "Pong";
     });
     ipcMain.handle("quitApp", () => {
       this.window.setClosable(true);

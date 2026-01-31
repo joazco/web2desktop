@@ -7,7 +7,7 @@ This document explains how to use **Steam achievements** with Web2Desktop.
 ## Requirements
 
 - Steam installed and running.
-- A valid `appId` in `src/config.ts`.
+- A valid `appId` in [`src/config.ts`](../src/config.ts).
 - The Steam API must be initialized (Web2Desktop does this on startup).
 
 Config example:
@@ -51,7 +51,7 @@ console.log("Unlocked after call?", isActivated);
 
 ---
 
-## Reset an achievement (clear)
+## Clear an achievement
 
 ```js
 const achievementId = "START_ADVENTURE";
