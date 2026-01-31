@@ -24,9 +24,11 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
    - [Windows](./docs/BUILD_WINDOWS.md)
    - [macOS](./docs/BUILD_MACOS.md)
    - [Linux](./docs/BUILD_LINUX.md)
-6. Steam
-   - [Steam basics](./docs/STEAM.md)
-   - [Achievements](./docs/STEAM_ACHIEVEMENTS.md)
+6. Plugins
+   - Steam
+     - [Steam basics](./docs/STEAM.md)
+     - [Achievements](./docs/STEAM_ACHIEVEMENTS.md)
+   - [Your Custom Plugin](./docs/YOUR_CUSTOM_PLUGIN.md)
 
 ---
 

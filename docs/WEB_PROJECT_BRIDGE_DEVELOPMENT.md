@@ -8,7 +8,7 @@ This document explains how to load a web source **in development mode** with Web
 
 The demo is in `demo/`. To load it in the app:
 
-1. In `src/config.ts`, set the dev source to `file` mode.
+1. In [`src/config.ts`](../src/config.ts), set the dev source to `file` mode.
 2. Start the app with `npm run dev`.
 
 Example:

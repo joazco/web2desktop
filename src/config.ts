@@ -81,22 +81,14 @@ const config: Omit<AppConfigInterface, "size"> = {
     homepage: "https://joazco.com",
     copyright: "© Web2Desktop JOAZCO Inc.",
     // windows: {},
-    apple: {
-      signature: {
-        appleId: "jazoulay@joazco.com",
-        appleIdPassword: "ztxd-vkdq-hdyy-auwm",
-        identity:
-          'E2AC9F15CCBFABA1205F7BE549DE725578EA37A7 "Developer ID Application: Jordan AZOULAY (U4GUN9B2KX)"',
-        teamId: "U4GUN9B2KX",
-      },
-    },
+    // apple: {},
     // linux: {}
   },
-  // plugins: {
-  //   Steam: {
-  //     appId: 12345678,
-  //   },
-  // },
+  plugins: {
+    Steam: {
+      appId: 3119460,
+    },
+  },
 };
 
 export default config;
