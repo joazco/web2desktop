@@ -84,11 +84,11 @@ const config: Omit<AppConfigInterface, "size"> = {
     // apple: {},
     // linux: {}
   },
-  plugins: {
-    Steam: {
-      appId: 3119460,
-    },
-  },
+  // plugins: {
+  //   Steam: {
+  //     appId: 12345678,
+  //   },
+  // },
 };
 
 export default config;

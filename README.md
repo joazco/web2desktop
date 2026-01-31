@@ -29,6 +29,8 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
      - [Steam basics](./docs/STEAM.md)
      - [Achievements](./docs/STEAM_ACHIEVEMENTS.md)
    - [Your Custom Plugin](./docs/YOUR_CUSTOM_PLUGIN.md)
+7. App Menu
+   - [Create and interact with the App’s Menu](./docs/CREATE_AND_INTERACT_APP_MENU.md)
 
 ---
 

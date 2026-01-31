@@ -64,6 +64,7 @@ npm run dev
 
 ```ts
 webSource: {
+  // Works same with 'https'
   dev: { mode: "http", target: "http://localhost:5173" },
 },
 ```
