@@ -1,3 +1,9 @@
+/**
+ * web2desktop
+ * https://github.com/joazco/web2desktop
+ * © 2026 Jordan Azoulay — MIT License
+ */
+
 import { ipcMain } from "electron";
 import fs from "node:fs";
 import path from "node:path";
