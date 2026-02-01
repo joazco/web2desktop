@@ -4,7 +4,7 @@ This document explains how to create a plugin for Web2Desktop and run it on the 
 
 ## 1) Create the plugin file
 
-Create a file in `src/plugins`, for example `src/plugins/my_plugin.ts`, then create a class that implements `Web2DesktopPluginInterface` (see [`src/types.ts`](../src/types.ts)).
+Create a file in `src/plugins`, for example `src/plugins/my_plugin.ts`, then create a class that implements [`Web2DesktopPluginInterface`](TYPES.md#plugin-interface) (see [`src/types.ts`](./TYPES.md)).
 
 Simple example:
 

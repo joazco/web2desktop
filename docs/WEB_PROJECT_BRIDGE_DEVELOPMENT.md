@@ -1,6 +1,7 @@
 # Bridge a web project in development
 
 This document explains how to load a web source **in development mode** with Web2Desktop.
+The configuration is defined in the file [`src/config.ts`](../src/config.ts), using the `webSource` key, which is typed with the [`WebSourceConfig`](TYPES.md#web-source-configuration) interface.
 
 ---
 

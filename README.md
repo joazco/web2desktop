@@ -11,6 +11,7 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
 1. Getting started
    - [Installation](./docs/INSTALLATION.md)
    - [Configuration](./docs/CONFIGURATION.md)
+   - [Types](./docs/TYPES.md)
 2. Bridge a Web Project
    - [Development](./docs/WEB_PROJECT_BRIDGE_DEVELOPMENT.md)
    - [Production](./docs/WEB_PROJECT_BRIDGE_PRODUCTION.md)
