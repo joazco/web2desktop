@@ -3,6 +3,8 @@
 Web2Desktop loads everything inside the `www/` folder.  
 Your goal: **build your web project** so it outputs a static `index.html` plus its assets (JS/CSS/images), then **copy everything into `www/`**.
 
+The configuration is defined in the file [`src/config.ts`](../src/config.ts), using the `webSource` key, which is typed with the [`WebSourceConfig`](TYPES.md#web-source-configuration) interface.
+
 If you want to load a different file in production (not `index.html`), you can override it in [`config.ts`](../src/config.ts):
 
 ```ts

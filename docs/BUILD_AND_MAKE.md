@@ -38,7 +38,7 @@ out/make
 
 ## Notes
 
-- The format depends on your configuration ([`src/config.ts`](../src/config.ts)).
+- The format depends on your configuration ([`src/config.ts`](../src/config.ts)) with [typage](./TYPES.md).
 - You can override the Forge config by creating a [`forge.config.local.json`](../forge.config.local.json).
   ⚠️ Be careful: it **overwrites** the Forge config, so any missing fields will be lost.
 - By default, **the ZIP maker is enabled** on all platforms.

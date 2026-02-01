@@ -4,8 +4,8 @@ This document explains how to define the application menu and capture clicks in 
 
 ## 1) Declare the menu in the config
 
-The menu is configured in [`src/config.ts`](../src/config.ts) under the `applicationMenu` key.
-The structure is defined in [`src/types.ts`](../src/types.ts) via `AppConfigInterface`.
+The menu is configured in [`src/config.ts`](../src/config.ts) under the [`applicationMenu`](TYPES.md#interface-appconfiginterface) key.
+The structure is defined in [`src/types.ts`](./TYPES.md) via [`AppConfigInterfaceApplicationMenu`](TYPES.md#application-menu-configuration).
 
 Simple example:
 
@@ -48,7 +48,7 @@ Important points:
 ## 2) Capture clicks from a plugin
 
 To react to clicks, implement `handleClickAppMenuItem` in your plugin
-(interface `Web2DesktopPluginInterface` in [`src/types.ts`](../src/types.ts)).
+(interface [`Web2DesktopPluginInterface`](TYPES.md#interface-web2desktopplugininterface) in [`src/types.ts`](./TYPES.md)).
 
 Example inspired by the Steam plugin ([`src/plugins/steam.ts`](../src/plugins/steam.ts)):
 
