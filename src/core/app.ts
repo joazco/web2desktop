@@ -62,16 +62,21 @@ export class App {
   }
 
   private loadUrl() {
+    const resolver = () => {
+      this.sendMainWindowOpenned();
+    };
     if (global.isProduction) {
-      this.window.loadFile(
-        path.join(
-          __dirname,
-          "..",
-          "..",
-          "www",
-          global.config.webSource?.prod?.target ?? "index.html",
-        ),
-      );
+      this.window
+        .loadFile(
+          path.join(
+            __dirname,
+            "..",
+            "..",
+            "www",
+            global.config.webSource?.prod?.target ?? "index.html",
+          ),
+        )
+        .then(resolver);
       return;
     }
 
@@ -81,22 +86,24 @@ export class App {
       },
     } = global.config;
     if (!mode || !target) {
-      this.window.loadFile(
-        path.join(__dirname, "..", "..", "www", "index.html"),
-      );
+      this.window
+        .loadFile(path.join(__dirname, "..", "..", "www", "index.html"))
+        .then(resolver);
     }
     switch (mode) {
       case "file": {
         const fileUrl = pathToFileURL(target).toString();
-        this.window.loadURL(fileUrl);
+        this.window.loadURL(fileUrl).then(resolver);
         break;
       }
       case "http":
-        this.window.loadURL(target);
+        this.window.loadURL(target).then(resolver);
         break;
       case "www":
       default:
-        this.window.loadFile(path.join(__dirname, "..", "..", "www", target));
+        this.window
+          .loadFile(path.join(__dirname, "..", "..", "www", target))
+          .then(resolver);
     }
   }
 
@@ -216,5 +223,13 @@ export class App {
       });
     });
     return plugins;
+  }
+
+  sendMainWindowOpenned() {
+    getAllPlugins().forEach((plugin) => {
+      if (plugin.handleMainWindowOpenned) {
+        plugin.handleMainWindowOpenned(this.window);
+      }
+    });
   }
 }

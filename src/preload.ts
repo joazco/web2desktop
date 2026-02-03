@@ -6,6 +6,7 @@
 
 // Preload script: expose a safe, minimal API to the renderer.
 
+import { IpcRendererEvent } from "electron";
 // eslint-disable-next-line import/no-unresolved
 import { contextBridge, ipcRenderer } from "electron/renderer";
 
@@ -20,10 +21,12 @@ contextBridge.exposeInMainWorld("web2desktop", {
   electron: () => process.versions.electron,
   ping: () => ipcRenderer.invoke("ping"),
   logPlugins: () => ipcRenderer.invoke("logPlugins"),
-  // Subscribe to AppConfig updates pushed from the main process.
+  // Subscribe to AppConfig updates pushed from the main process. Returns a function to unsubscribe from the event.
   onAppConfig: (callback: (args: Partial<AppConfigInterface>) => void) => {
-    const subscription = (_event: any, args: Partial<AppConfigInterface>) =>
-      callback(args);
+    const subscription = (
+      _event: IpcRendererEvent,
+      args: Partial<AppConfigInterface>,
+    ) => callback(args);
     ipcRenderer.invoke("getAppConfig");
     ipcRenderer.on("appConfig", subscription);
     return () => ipcRenderer.removeListener("appConfig", subscription);
@@ -38,4 +41,11 @@ contextBridge.exposeInMainWorld("web2desktop", {
   // Invoke on custom plugins
   invoke: (channel: string, args?: Record<string, any>) =>
     ipcRenderer.invoke(channel, args),
+  // Subscribe to an event emitted by the main process. Returns a function to unsubscribe from the event.
+  on(channel: string, callback: (payload: any) => void) {
+    const subscription = (_event: IpcRendererEvent, payload: any) =>
+      callback(payload);
+    ipcRenderer.on(channel, subscription);
+    return () => ipcRenderer.removeListener(channel, subscription);
+  },
 });
