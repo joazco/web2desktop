@@ -45,7 +45,7 @@ export async function loadPlugins(pluginsDir: string) {
         ? global.config.plugins[plugin.pluginName]
         : undefined;
       plugin.config = config;
-      plugin.init();
+      await plugin.init();
       plugin.handlers.forEach((handler, channel) => {
         ipcMain.handle(channel, handler);
       });

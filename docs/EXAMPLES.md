@@ -51,7 +51,7 @@ export default class ResizeWindowPlugin implements Web2DesktopPluginInterface {
   > = new Map();
   pluginName = "ResizeWindow";
 
-  init() {}
+  async init() {}
 
   handleMainWindowOpenned(mainWindow: BrowserWindow) {
     const handler = () => {

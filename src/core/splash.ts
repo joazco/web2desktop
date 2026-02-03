@@ -10,7 +10,7 @@ import path from "node:path";
 import { loadPlugins } from "../utils/plugins";
 
 export class SplashScreen {
-  createWindow(): Promise<void> {
+  async createWindow(): Promise<void> {
     // Lightweight, frameless splash shown during startup.
     const win = new BrowserWindow({
       width: 800,
@@ -31,13 +31,13 @@ export class SplashScreen {
     // Load the static splash HTML.
     win.loadFile(path.join(__dirname, "..", "..", "splash", "splash.html"));
 
-    return new Promise<void>((resolve) => {
-      // Keep the splash visible briefly, then close it.
-      setTimeout(async () => {
-        await loadPlugins(path.join(__dirname, "..", "plugins"));
-        win.close();
-        resolve();
-      }, 2000);
-    });
+    await Promise.all([
+      new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      }),
+      loadPlugins(path.join(__dirname, "..", "plugins")),
+    ]);
   }
 }

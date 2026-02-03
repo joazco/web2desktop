@@ -21,7 +21,7 @@ export class Steam implements Web2DesktopPluginInterface<SteamConfig> {
   >();
   config?: SteamConfig;
 
-  init() {
+  async init() {
     // Initialize the Steamworks client (optional, based on config).
     try {
       this._client = steamworks.init(this.config?.appId);
@@ -33,7 +33,7 @@ export class Steam implements Web2DesktopPluginInterface<SteamConfig> {
     this.handlers.set("steam.getName", this.getName);
     this.handlers.set(
       "steam.achievement.isActivated",
-      this.isAchievementActivated,
+      this.isAchievementActivated
     );
     this.handlers.set("steam.achievement.activate", this.activateAchievement);
     this.handlers.set("steam.achievement.clear", this.clearAchievement);
@@ -46,7 +46,7 @@ export class Steam implements Web2DesktopPluginInterface<SteamConfig> {
       shell.openExternal(`steam://nav/games/details/${this.config?.appId}`);
     } else if (id === "see-achievements") {
       shell.openExternal(
-        `steam://openurl/https://steamcommunity.com/stats/${this.config?.appId}/achievements`,
+        `steam://openurl/https://steamcommunity.com/stats/${this.config?.appId}/achievements`
       );
     }
   }
@@ -69,14 +69,14 @@ export class Steam implements Web2DesktopPluginInterface<SteamConfig> {
 
   private isAchievementActivated = (
     _event: Electron.IpcMainInvokeEvent,
-    args: { achievementId: string },
+    args: { achievementId: string }
   ) => {
     return !!this.ensureClient().achievement.isActivated(args.achievementId);
   };
 
   private activateAchievement = (
     _: Electron.IpcMainInvokeEvent,
-    args: { achievementId: string },
+    args: { achievementId: string }
   ) => {
     const client = this.ensureClient();
     let isActivated = !!client.achievement.isActivated(args.achievementId);
@@ -89,7 +89,7 @@ export class Steam implements Web2DesktopPluginInterface<SteamConfig> {
 
   private clearAchievement = (
     _: Electron.IpcMainInvokeEvent,
-    args: { achievementId: string },
+    args: { achievementId: string }
   ) => {
     const client = this.ensureClient();
     client.achievement.clear(args.achievementId);

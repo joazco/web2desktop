@@ -121,7 +121,7 @@ export interface Web2DesktopPluginInterface<T = unknown> {
     (event: Electron.IpcMainInvokeEvent, args?: Record<string, any>) => any
   >;
   config?: T;
-  init: () => void;
+  init: () => Promise<void>;
   handleMainWindowOpenned?: (mainWindow: BrowserWindow) => void;
   handleClickAppMenuItem?: (id: string) => void;
 }

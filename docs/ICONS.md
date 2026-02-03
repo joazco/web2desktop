@@ -1,4 +1,4 @@
-# Icons & Splash
+# Icons
 
 This document explains where the icon files are located and how to change them:
 
