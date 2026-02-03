@@ -25,8 +25,10 @@ declare global {
           channels: string[];
         }[]
       >;
-      // Subscribe to AppConfig updates pushed from the main process.
-      onAppConfig: (callback: (args: any) => void) => () => void;
+      // Subscribe to AppConfig updates pushed from the main process. Returns a function to unsubscribe from the event.
+      onAppConfig: (
+        callback: (args: any) => void,
+      ) => () => { removeListener: () => any };
       // Update app config from the renderer.
       setAppConfig: (config: Partial<AppConfigInterface>) => Promise<void>;
       // Restore defaults config from config.ts.
@@ -35,6 +37,11 @@ declare global {
       quitApp: () => Promise<void>;
       // Invoke on custom plugins
       invoke: (channel: string, args?: Record<string, any>) => Promise<any>;
+      // Subscribe to an event emitted by the main process. Returns a function to unsubscribe from the event.
+      on: (
+        channel: string,
+        callback: (payload: any) => void,
+      ) => { removeListener: () => any };
     };
   }
 }

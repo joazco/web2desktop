@@ -5,8 +5,16 @@
       "path": ".",
     },
     {
+      "name": "Out",
+      "path": "./out",
+    },
+    {
       "name": "Docs",
       "path": "./docs",
+    },
+    {
+      "name": "Demo",
+      "path": "./demo",
     },
     {
       "name": "Splash",
@@ -19,6 +27,10 @@
     {
       "name": "Core",
       "path": "./src/core",
+    },
+    {
+      "name": "Utils",
+      "path": "./src/utils",
     },
     {
       "name": "Plugins",

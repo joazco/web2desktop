@@ -24,3 +24,5 @@
    - [Your Custom Plugin](./YOUR_CUSTOM_PLUGIN.md)
 7. App Menu
    - [Create and interact with the App’s Menu](./CREATE_AND_INTERACT_APP_MENU.md)
+8. Advanced docs
+   - [Examples](./EXAMPLES.md)

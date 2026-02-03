@@ -122,5 +122,6 @@ export interface Web2DesktopPluginInterface<T = unknown> {
   >;
   config?: T;
   init: () => void;
+  handleMainWindowOpenned?: (mainWindow: BrowserWindow) => void;
   handleClickAppMenuItem?: (id: string) => void;
 }
