@@ -11,7 +11,7 @@
    - [Control Window (Preload API)](./CONTROL_WINDOW.md)
    - [TypeScript typings](./TYPESCRIPT.md)
 4. Assets
-   - [Icons & Splash](./ICONS.md)
+   - [Icons](./ICONS.md)
 5. Build & packaging
    - [Build and Make](./BUILD_AND_MAKE.md)
    - [Windows](./BUILD_WINDOWS.md)
@@ -26,3 +26,4 @@
    - [Create and interact with the App’s Menu](./CREATE_AND_INTERACT_APP_MENU.md)
 8. Advanced docs
    - [Examples](./EXAMPLES.md)
+   - [Splash Screen](./SPLASH.md)

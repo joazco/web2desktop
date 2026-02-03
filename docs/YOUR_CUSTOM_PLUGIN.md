@@ -23,7 +23,7 @@ export class MyPlugin implements Web2DesktopPluginInterface<MyPluginConfig> {
   >();
   config?: MyPluginConfig;
 
-  init() {
+  async init() {
     this.handlers.set("myPlugin.ping", () => "pong");
   }
 }

@@ -119,11 +119,11 @@
 
 ### Interface `Web2DesktopPluginInterface`:
 
-| Property                  | Type                                                                                      | Description                                                     |
-| ------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `pluginName`              | `string`                                                                                  | Unique plugin name (used as config key).                        |
-| `handlers`                | `Map<string, (event: Electron.IpcMainInvokeEvent, args?: Record<string, any>) => any>`    | IPC handlers exposed to the frontend.                           |
-| `config`                  | `T`                                                                                       | Plugin configuration injected from `config.ts` (optional).      |
-| `init`                    | `() => void`                                                                              | Initialization hook for the plugin.                             |
-| `handleMainWindowOpenned` | `(mainWindow: BrowserWindow) => void`                                                     | Optional hook called when the main window is opened.            |
-| `handleClickAppMenuItem`  | `(id: string) => void`                                                                    | Optional menu click handler (receives the menu item `id`).      |
+| Property                  | Type                                                                                   | Description                                                |
+| ------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `pluginName`              | `string`                                                                               | Unique plugin name (used as config key).                   |
+| `handlers`                | `Map<string, (event: Electron.IpcMainInvokeEvent, args?: Record<string, any>) => any>` | IPC handlers exposed to the frontend.                      |
+| `config`                  | `T`                                                                                    | Plugin configuration injected from `config.ts` (optional). |
+| `init`                    | `() => Promise<void>`                                                                  | Initialization hook for the plugin.                        |
+| `handleMainWindowOpenned` | `(mainWindow: BrowserWindow) => void`                                                  | Optional hook called when the main window is opened.       |
+| `handleClickAppMenuItem`  | `(id: string) => void`                                                                 | Optional menu click handler (receives the menu item `id`). |

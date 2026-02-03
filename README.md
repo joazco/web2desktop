@@ -19,7 +19,7 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
    - [Control Window (Preload API)](./docs/CONTROL_WINDOW.md)
    - [TypeScript typings](./docs/TYPESCRIPT.md)
 4. Assets
-   - [Icons & Splash](./docs/ICONS.md)
+   - [Icons](./docs/ICONS.md)
 5. Build & packaging
    - [Build and Make](./docs/BUILD_AND_MAKE.md)
    - [Windows](./docs/BUILD_WINDOWS.md)
@@ -34,6 +34,7 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
    - [Create and interact with the App’s Menu](./docs/CREATE_AND_INTERACT_APP_MENU.md)
 8. Advanced docs
    - [Examples](./docs/EXAMPLES.md)
+   - [Splash Screen](./docs/SPLASH.md)
 
 ---
 
