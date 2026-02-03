@@ -92,6 +92,8 @@ const config: Omit<AppConfigInterface, "size"> = {
 - `src/plugins/myPlugin.ts`:
 
 ```ts
+import { BrowserWindow } from "electron";
+
 import { Web2DesktopPluginInterface } from "../types";
 
 type MyPluginConfig = {
@@ -123,6 +125,8 @@ export class MyPlugin implements Web2DesktopPluginInterface<MyPluginConfig> {
       this._enabled = true;
     }
   }
+
+  handleMainWindowOpenned(_mainWindow: BrowserWindow) {}
 
   private setEnabled(_: Electron.IpcMainInvokeEvent, args: { enable: string }) {
     this._enabled = args.enable;

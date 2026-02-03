@@ -2,7 +2,7 @@
 
 Before running the project, define the default configuration for your app in [`./src/config.ts`](../src/config.ts).
 
-**_You can also create a [`config.local.json`](../src//config.local.json) file to override values from `config.ts`. This file uses JSON format, which is easier to edit or generate from external code or tools._**
+**_You can also create a [`src/config.local.json`](../src/config.local.json) file to override values from `config.ts`. This file uses JSON format, which is easier to edit or generate from external code or tools._**
 
 ## App Config
 
