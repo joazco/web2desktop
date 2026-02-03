@@ -12,6 +12,7 @@
     "dev:electron": "wait-on dist/main.js && nodemon --delay 200ms --watch dist --watch www --watch splash --watch demo --ext js,json,html,css,png,jpg,svg --signal SIGTERM --exec \"electron-forge start\"",
     "package": "npm run build && electron-forge package",
     "make": "npm run build && electron-forge make",
+    "make:demo": "rimraf \"www/*\" && cpy \"demo/**\" www --parents && npm run make",
     "publish": "npm run build && electron-forge publish",
     "lint": "eslint --ext .ts,.tsx ."
   },
@@ -36,9 +37,11 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "concurrently": "^9.2.1",
+    "cpy-cli": "^5.0.0",
     "electron": "39.2.7",
     "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.32.0",
+    "rimraf": "^6.0.1",
     "nodemon": "^3.1.11",
     "typescript": "^5.9.3",
     "wait-on": "^9.0.3"
