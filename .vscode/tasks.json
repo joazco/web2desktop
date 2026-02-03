@@ -17,6 +17,13 @@
       "problemMatcher": []
     },
     {
+      "label": "make:demo",
+      "type": "npm",
+      "script": "make:demo",
+      "detail": "Copies demo into www then runs the make build.",
+      "problemMatcher": []
+    },
+    {
       "label": "lint",
       "type": "npm",
       "script": "lint",
