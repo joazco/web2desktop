@@ -5,7 +5,6 @@
  */
 
 import {
-  app,
   BaseWindow,
   BrowserWindow,
   globalShortcut,
