@@ -2,34 +2,201 @@
 
 Before running the project, define the default configuration for your app in [`./src/config.ts`](../src/config.ts).
 
-`AppConfigInterface`:
+**_You can also create a [`src/config.local.json`](../src/config.local.json) file to override values from `config.ts`. This file uses JSON format, which is easier to edit or generate from external code or tools._**
 
-| Property                                      | Type                                                                                                                                                                          | Description                                                                  |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `name`                                        | `string`                                                                                                                                                                      | Application name.                                                            |
-| `themeSource`                                 | `"system" \| "light" \| "dark"`                                                                                                                                               | OS theme to apply to the app.                                                |
-| `fullScreen`                                  | `boolean`                                                                                                                                                                     | Launch in fullscreen or not.                                                 |
-| `resizable`                                   | `boolean`                                                                                                                                                                     | Allow the window to be resized by the user.                                  |
-| `closable`                                    | `boolean`                                                                                                                                                                     | Allow the window to be closed by the user.                                   |
-| `openDevtools`                                | `boolean`                                                                                                                                                                     | Open DevTools on startup.                                                    |
-| `disableOpenDevToolOnProduction`              | `boolean`                                                                                                                                                                     | Prevent DevTools from opening in production.                                 |
-| `webSource.prod.target`                       | `string`                                                                                                                                                                      | Production target file inside `www` (default: `index.html`).                 |
-| `webSource.dev.mode`                          | `"www" \| "http" \| "file"`                                                                                                                                                   | Development source mode.                                                    |
-| `webSource.dev.target`                        | `string`                                                                                                                                                                      | Development target (`index.html`, `http://...`, or a file path).             |
-| `steam.appId`                                 | `number`                                                                                                                                                                      | Steam game ID used to enable Steam API calls.                                |
-| `build.appBundleId`                           | `string`                                                                                                                                                                      | Application bundle identifier.                                               |
-| `build.version`                               | `string`                                                                                                                                                                      | Application version.                                                         |
-| `build.author`                                | `string`                                                                                                                                                                      | App author name.                                                             |
-| `build.maintainerEmail`                       | `string`                                                                                                                                                                      | Maintainer contact email.                                                    |
-| `build.homepage`                              | `string`                                                                                                                                                                      | App or author homepage.                                                      |
-| `build.copyright`                             | `string`                                                                                                                                                                      | Application copyright.                                                       |
-| `build.apple.makers`                          | `"dmg"[]`                                                                                                                                                                     | macOS makers to use (DMG).                                                   |
-| `build.apple.signature.identity`              | `string`                                                                                                                                                                      | macOS signing identity.                                                      |
-| `build.apple.signature.appleId`               | `string`                                                                                                                                                                      | Apple ID used for notarization.                                              |
-| `build.apple.signature.appleIdPassword`       | `string`                                                                                                                                                                      | Apple ID password or app-specific password.                                  |
-| `build.apple.signature.teamId`                | `string`                                                                                                                                                                      | Apple Developer Team ID.                                                     |
-| `build.windows.markers`                       | `"squirrel"[]`                                                                                                                                                                | Windows maker to use (Squirrel).                                             |
-| `build.windows.signature.certificateFile`     | `string`                                                                                                                                                                      | Path to the Windows signing certificate.                                     |
-| `build.windows.signature.certificatePassword` | `string`                                                                                                                                                                      | Password for the Windows certificate.                                        |
-| `build.linux.makers`                          | `("deb" \| "rpm")[]`                                                                                                                                                          | Linux makers to use (Deb/RPM).                                               |
-| `build.linux.categories`                      | `("AudioVideo" \| "Audio" \| "Video" \| "Development" \| "Education" \| "Game" \| "Graphics" \| "Network" \| "Office" \| "Science" \| "Settings" \| "System" \| "Utility")[]` | Linux package categories (Deb/RPM).                                          |
+## App Config
+
+The default application configuration is defined in [`./src/config.ts`](../src/config.ts). To understand its structure, you can refer to the typing documentation in [typage](./TYPES.md).
+
+## Simple example
+
+```ts
+const config: Omit<AppConfigInterface, "size"> = {
+  name: "Web2Desktop",
+  themeSource: "system",
+  fullScreen: false,
+  resizable: true,
+  closable: true,
+  openDevtools: false,
+  disableOpenDevToolOnProduction: true,
+  applicationMenu: [
+    {
+      label: "&App",
+      submenu: [
+        {
+          id: "quit",
+          label: "&Quit",
+        },
+      ],
+    },
+    {
+      label: "&Edit",
+      submenu: [
+        { role: "undo" },
+        { role: "redo" },
+        { type: "separator" },
+        { role: "cut" },
+        { role: "copy" },
+        { role: "paste" },
+        { role: "selectAll" },
+      ],
+    },
+    {
+      label: "&View",
+      hideOnProduction: true,
+      submenu: [
+        {
+          label: "&Reload",
+          role: "reload",
+        },
+        {
+          role: "toggleDevTools",
+        },
+      ],
+    },
+  ],
+  webSource: {
+    prod: {
+      target: "index.html",
+    },
+    dev: {
+      mode: "file",
+      target: "./demo/index.html",
+    },
+  },
+  build: {
+    appBundleId: "com.joazco.web2desktop",
+    version: "1.0.0",
+    author: "AZOULAY Jordan",
+    maintainerEmail: "contact@joazco.com",
+    homepage: "https://joazco.com",
+    copyright: "© Web2Desktop JOAZCO Inc.",
+    // windows: {},
+    // apple: {},
+    // linux: {}
+  },
+};
+```
+
+## Full example
+
+```ts
+const config: Omit<AppConfigInterface, "size"> = {
+  name: "Web2Desktop",
+  themeSource: "system",
+  fullScreen: false,
+  resizable: true,
+  closable: true,
+  openDevtools: false,
+  disableOpenDevToolOnProduction: true,
+  applicationMenu: [
+    {
+      label: "&App",
+      submenu: [
+        {
+          id: "quit",
+          label: "&Quit",
+        },
+      ],
+    },
+    {
+      label: "&Edit",
+      submenu: [
+        { role: "undo" },
+        { role: "redo" },
+        { type: "separator" },
+        { role: "cut" },
+        { role: "copy" },
+        { role: "paste" },
+        { role: "selectAll" },
+      ],
+    },
+    {
+      label: "&View",
+      hideOnProduction: true,
+      submenu: [
+        {
+          label: "&Reload",
+          role: "reload",
+        },
+        {
+          role: "toggleDevTools",
+        },
+      ],
+    },
+    {
+      label: "Steam",
+      submenu: [
+        {
+          id: "see-store-page",
+          label: "See Store Page",
+          accelerator: "Ctrl+T",
+        },
+        {
+          id: "see-achievements",
+          label: "See achievements",
+          accelerator: "Ctrl+P",
+        },
+      ],
+    },
+  ],
+  webSource: {
+    prod: {
+      target: "index.html",
+    },
+    dev: {
+      // Angular example
+      mode: "http",
+      // Works same with 'https'
+      target: "http://localhost:4200",
+    },
+  },
+  build: {
+    appBundleId: "com.joazco.web2desktop",
+    version: "1.0.0",
+    author: "AZOULAY Jordan",
+    maintainerEmail: "contact@joazco.com",
+    homepage: "https://joazco.com",
+    copyright: "© Web2Desktop JOAZCO Inc.",
+    windows: {
+      markers: ["squirrel"],
+      signature: {
+        certificateFile: "./resources/windows/file.cert",
+        certificatePassword: "mypassword",
+      },
+    },
+    apple: {
+      makers: ["dmg"],
+      signature: {
+        appleId: "contact@joazco.com",
+        appleIdPassword: "mypassword",
+        identity:
+          'E1D2S3EZ5A4S8SD9E6Z3A2W1C4DS5A6 "Developer ID Application: Jordan AZOULAY (A8SDFE74)"',
+        teamId: "A8SDFE74",
+      },
+    },
+    linux: { categories: ["Game"] },
+  },
+  plugins: {
+    Steam: {
+      appId: 123456,
+    },
+  },
+};
+```
+
+## Plugins configuration
+
+Plugins are configured under the `plugins` key using the plugin name as the object key. Each plugin can define its own configuration shape.
+
+Example:
+
+```json
+{
+  "plugins": {
+    "Steam": {
+      "appId": 12345678
+    }
+  }
+}
+```

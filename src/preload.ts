@@ -6,6 +6,7 @@
 
 // Preload script: expose a safe, minimal API to the renderer.
 
+import { IpcRendererEvent } from "electron";
 // eslint-disable-next-line import/no-unresolved
 import { contextBridge, ipcRenderer } from "electron/renderer";
 
@@ -19,10 +20,13 @@ contextBridge.exposeInMainWorld("web2desktop", {
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
   ping: () => ipcRenderer.invoke("ping"),
-  // Subscribe to AppConfig updates pushed from the main process.
-  onAppConfig: (func: (args: Partial<AppConfigInterface>) => void) => {
-    const subscription = (_event: any, args: Partial<AppConfigInterface>) =>
-      func(args);
+  logPlugins: () => ipcRenderer.invoke("logPlugins"),
+  // Subscribe to AppConfig updates pushed from the main process. Returns a function to unsubscribe from the event.
+  onAppConfig: (callback: (args: Partial<AppConfigInterface>) => void) => {
+    const subscription = (
+      _event: IpcRendererEvent,
+      args: Partial<AppConfigInterface>,
+    ) => callback(args);
     ipcRenderer.invoke("getAppConfig");
     ipcRenderer.on("appConfig", subscription);
     return () => ipcRenderer.removeListener("appConfig", subscription);
@@ -34,32 +38,14 @@ contextBridge.exposeInMainWorld("web2desktop", {
   resetAppConfig: () => ipcRenderer.invoke("resetAppConfig"),
   // Request app quit.
   quitApp: () => ipcRenderer.invoke("quitApp"),
-  /** Steam */
-  steam: {
-    // One-shot Steam availability check.
-    isWorking: () => ipcRenderer.invoke("steam.isWorking") as Promise<boolean>,
-    // Read the local player's Steam name.
-    getName: () =>
-      ipcRenderer.invoke("steam.getName") as Promise<string | undefined>,
-    achievement: {
-      // Query achievement status.
-      isActivated: (achievement: string) =>
-        ipcRenderer.invoke(
-          "steam.achievement.isActivated",
-          achievement,
-        ) as Promise<boolean>,
-      // Activate an achievement and return the updated status.
-      activate: (achievement: string) =>
-        ipcRenderer.invoke(
-          "steam.achievement.activate",
-          achievement,
-        ) as Promise<boolean>,
-      // Clear (reset) an achievement and return the updated status.
-      clear: (achievement: string) =>
-        ipcRenderer.invoke(
-          "steam.achievement.clear",
-          achievement,
-        ) as Promise<boolean>,
-    },
+  // Invoke on custom plugins
+  invoke: (channel: string, args?: Record<string, any>) =>
+    ipcRenderer.invoke(channel, args),
+  // Subscribe to an event emitted by the main process. Returns a function to unsubscribe from the event.
+  on(channel: string, callback: (payload: any) => void) {
+    const subscription = (_event: IpcRendererEvent, payload: any) =>
+      callback(payload);
+    ipcRenderer.on(channel, subscription);
+    return () => ipcRenderer.removeListener(channel, subscription);
   },
 });

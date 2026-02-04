@@ -11,8 +11,59 @@ const config: Omit<AppConfigInterface, "size"> = {
   fullScreen: false,
   resizable: true,
   closable: true,
-  openDevtools: true,
+  openDevtools: false,
   disableOpenDevToolOnProduction: true,
+  applicationMenu: [
+    {
+      label: "&App",
+      submenu: [
+        {
+          id: "quit",
+          label: "&Quit",
+        },
+      ],
+    },
+    {
+      label: "&Edit",
+      submenu: [
+        { role: "undo" },
+        { role: "redo" },
+        { type: "separator" },
+        { role: "cut" },
+        { role: "copy" },
+        { role: "paste" },
+        { role: "selectAll" },
+      ],
+    },
+    {
+      label: "&View",
+      hideOnProduction: true,
+      submenu: [
+        {
+          label: "&Reload",
+          role: "reload",
+        },
+        {
+          role: "toggleDevTools",
+        },
+      ],
+    },
+    // {
+    //   label: "Steam",
+    //   submenu: [
+    //     {
+    //       id: "see-store-page",
+    //       label: "See Store Page",
+    //       accelerator: "Ctrl+T",
+    //     },
+    //     {
+    //       id: "see-achievements",
+    //       label: "See achievements",
+    //       accelerator: "Ctrl+P",
+    //     },
+    //   ],
+    // },
+  ],
   webSource: {
     prod: {
       target: "index.html",
@@ -33,8 +84,10 @@ const config: Omit<AppConfigInterface, "size"> = {
     // apple: {},
     // linux: {}
   },
-  // steam: {
-  //   appId: 123456,
+  // plugins: {
+  //   Steam: {
+  //     appId: 12345678,
+  //   },
   // },
 };
 
