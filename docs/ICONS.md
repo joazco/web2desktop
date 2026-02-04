@@ -1,4 +1,4 @@
-# Icons & Splash
+# Icons
 
 This document explains where the icon files are located and how to change them:
 
@@ -123,5 +123,3 @@ icon: path.join(__dirname, "resources", "images", "icon.png"),
 - Avoid uncontrolled transparency if your design doesn’t support it.
 
 ---
-
-If you want, I can add a script to generate all icons from a single PNG.

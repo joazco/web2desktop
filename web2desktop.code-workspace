@@ -1,0 +1,44 @@
+{
+  "folders": [
+    {
+      "name": "Web2Destkop",
+      "path": ".",
+    },
+    {
+      "name": "Out",
+      "path": "./out",
+    },
+    {
+      "name": "Docs",
+      "path": "./docs",
+    },
+    {
+      "name": "Demo",
+      "path": "./demo",
+    },
+    {
+      "name": "Splash",
+      "path": "./splash",
+    },
+    {
+      "name": "Resources",
+      "path": "./Resources",
+    },
+    {
+      "name": "Core",
+      "path": "./src/core",
+    },
+    {
+      "name": "Utils",
+      "path": "./src/utils",
+    },
+    {
+      "name": "Plugins",
+      "path": "./src/plugins",
+    },
+    {
+      "name": "Src",
+      "path": "./src",
+    },
+  ],
+}

@@ -1,6 +1,7 @@
 # Bridge a web project in development
 
 This document explains how to load a web source **in development mode** with Web2Desktop.
+The configuration is defined in the file [`src/config.ts`](../src/config.ts), using the `webSource` key, which is typed with the [`WebSourceConfig`](TYPES.md#web-source-configuration) interface.
 
 ---
 
@@ -8,7 +9,7 @@ This document explains how to load a web source **in development mode** with Web
 
 The demo is in `demo/`. To load it in the app:
 
-1. In `src/config.ts`, set the dev source to `file` mode.
+1. In [`src/config.ts`](../src/config.ts), set the dev source to `file` mode.
 2. Start the app with `npm run dev`.
 
 Example:
@@ -64,6 +65,7 @@ npm run dev
 
 ```ts
 webSource: {
+  // Works same with 'https'
   dev: { mode: "http", target: "http://localhost:5173" },
 },
 ```

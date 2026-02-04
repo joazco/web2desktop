@@ -22,7 +22,7 @@ steam: {
 ## Check if Steam is available
 
 ```js
-const isWorking = await window.web2desktop?.steam.isWorking();
+const isWorking = await window.web2desktop?.invoke("steam.isWorking");
 if (isWorking) {
   console.log("Steam OK");
 } else {
@@ -35,7 +35,7 @@ if (isWorking) {
 ## Get the player display name
 
 ```js
-const name = await window.web2desktop?.steam.getName();
+const name = await window.web2desktop?.invoke("steam.getName");
 if (name) {
   console.log("Steam name:", name);
 } else {
@@ -48,13 +48,13 @@ if (name) {
 ## Full example
 
 ```js
-const isWorking = await window.web2desktop?.steam.isWorking();
+const isWorking = await window.web2desktop?.invoke("steam.isWorking");
 if (!isWorking) {
   console.log("Steam OFF");
   return;
 }
 
-const name = await window.web2desktop?.steam.getName();
+const name = await window.web2desktop?.invoke("steam.getName");
 console.log("Steam name:", name ?? "-");
 ```
 
