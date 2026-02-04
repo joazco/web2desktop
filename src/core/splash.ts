@@ -34,6 +34,7 @@ export class SplashScreen {
     await Promise.all([
       new Promise<void>((resolve) => {
         setTimeout(() => {
+          win.close();
           resolve();
         }, 2000);
       }),
