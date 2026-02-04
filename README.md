@@ -129,7 +129,7 @@ The project continues to evolve based on user feedback to improve the experience
 Questions, ideas, or feedback?
 
 👉 Join the **web2desktop Discord**:  
-https://discord.gg/H8b36mdzgn
+[Discord link](https://discord.gg/H8b36mdzgn)
 
 ---
 
