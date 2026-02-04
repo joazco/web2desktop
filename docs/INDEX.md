@@ -76,6 +76,48 @@ by Web2Desktop.
 
 ---
 
+## 🏗️ Architecture (high level)
+
+Simplified structure with only the key files/folders:
+
+```
+web2desktop/
+  forge.config.ts
+  forge.config.local.json
+  package.json
+  src/
+    main.ts
+    preload.ts
+    config.ts
+    config.local.json
+    types.ts
+    core/
+      app.ts
+      appInfos.ts
+      splash.ts
+    plugins/
+      steam.ts
+    utils/
+      store.ts
+      plugins.ts
+      config.ts
+  resources/
+    images/
+      icon.icns
+      icon.ico
+      icon.png
+      icon@2x.png
+      icon@3x.png
+    apple/
+      entitlements.mac.plist
+  splash/
+    splash.html
+    splash.png
+  www/
+```
+
+---
+
 ## ⚠️ Important rules
 
 - Web2Desktop **does not automatically expose all Electron APIs**
