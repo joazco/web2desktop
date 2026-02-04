@@ -1,12 +1,14 @@
 # Web2Desktop
 
-**Web2Desktop** transforms any already built website or web application into a native desktop application for **Windows, macOS, and Linux**.
+Web2Desktop is an Electron framework designed to quickly turn any web interface into a desktop application.
 
-It provides a lightweight Electron-based shell, a secure native bridge, and a simple workflow to package web builds as real desktop software — without modifying existing web code.
+It provides a ready-to-use desktop runtime, standard native utilities, and a plugin system. This enables immediate use without Electron code, while offering advanced customization for developers who want to extend the app’s behavior.
+
+Web2Desktop clearly separates web front-end development from desktop software development, providing a modular, scalable foundation suited to a wide range of use cases.
 
 ---
 
-## 📄 Docs
+## 📄 Documentation
 
 1. Getting started
    - [Installation](./docs/INSTALLATION.md)
@@ -31,33 +33,41 @@ It provides a lightweight Electron-based shell, a secure native bridge, and a si
      - [Achievements](./docs/STEAM_ACHIEVEMENTS.md)
    - [Your Custom Plugin](./docs/YOUR_CUSTOM_PLUGIN.md)
 7. App Menu
-   - [Create and interact with the App’s Menu](./docs/CREATE_AND_INTERACT_APP_MENU.md)
+   - [Create and interact with the app menu](./docs/CREATE_AND_INTERACT_APP_MENU.md)
 8. Advanced docs
    - [Examples](./docs/EXAMPLES.md)
    - [Splash Screen](./docs/SPLASH.md)
+
+A **Web2Desktop dedicated GPT** is available to help you use the framework.  
+👉 [Access the Web2Desktop GPT](https://chatgpt.com/g/g-698268bc20e88191b50d2e5a85b2af66-web2desktop)
 
 ---
 
 ## ✨ Why Web2Desktop?
 
-Building desktop apps from web projects often feels heavier than it should be.
+Building a desktop app from a web project often means rebuilding a full Electron application, even when the front end already exists. That adds extra development time, unnecessary complexity, and strong dependency on the Electron ecosystem.
 
-web2desktop focuses on:
+Web2Desktop takes a different approach.
 
-- ✅ simplicity over configuration
-- ✅ drop-in usage (HTML, CSS, JS builds)
-- ✅ security by default
-- ✅ open source & framework-agnostic
+It provides a generic, ready-to-use desktop runtime that can connect to any web interface and immediately deliver the essential features of desktop software: window management, app menu, lifecycle, system events, and more.
 
-No frontend framework lock-in.  
-No complex bundler setup.  
-Just your web build → desktop app.
+The goal is twofold:
+
+- enable fast conversion of an existing web front end into desktop software, without writing or maintaining Electron code
+- offer an extensible foundation for Electron developers, through a simple plugin system to enrich and customize native app behavior
+
+Web2Desktop clearly separates responsibilities:
+
+- the web front end stays independent, free to use any stack and deployment model
+- the desktop runtime manages the native environment and can be extended via plugins
+
+This approach makes it possible to build desktop apps faster and more simply, while still enabling deeper customization when needed.
 
 ---
 
-## 🎯 Who is this for?
+## 🎯 Who is it for?
 
-web2desktop is designed for:
+Web2Desktop is designed for:
 
 - web developers who want to ship desktop apps easily
 - game developers packaging web-based games
@@ -65,25 +75,52 @@ web2desktop is designed for:
 
 ---
 
-## 🚀 Features
+## 🎮 Game developers
 
-- Load static web builds (`index.html`, assets, JS, CSS)
-- Native desktop window management
-- Secure preload API (`contextIsolation`, `sandbox`)
-- Dev & production modes
-- Cross-platform builds (Windows / macOS / Linux)
-- Fully open source (MIT)
+Web2Desktop includes a ready-to-use Steam plugin that makes it easy to integrate Steam
+into a game built with web technologies (JavaScript / TypeScript).
+
+This plugin simplifies achievements and Steam interactions
+without having to write specific Electron code.
+
+Web2Desktop is therefore well suited for web game developers who want to distribute their game
+as a desktop application, especially on Steam.
+
+---
+
+## 🧱 What Web2Desktop provides out of the box
+
+Web2Desktop goes beyond simply loading a web interface inside an Electron window.
+It provides a complete desktop foundation with sensible defaults designed to speed up development.
+
+Built-in features include:
+
+- **Centralized configuration**  
+  The entire application (web source, window, menu, plugins, desktop behaviors)
+  is configured from a single file, without having to modify Electron code.
+
+- **Simplified icon system**  
+  App icons are handled via a predefined structure,
+  compatible with Windows, macOS, and Linux, without complex setup.
+
+- **Ready-to-use desktop utilities**  
+  Window management, app menu, lifecycle, events, and communication
+  between the web front end and the desktop runtime are already integrated.
+
+- **Modular plugin system**  
+  Native features can be extended with simple plugins,
+  without modifying the application core.
+
+Web2Desktop lets you focus on interface and business logic,
+while relying on a stable, reusable desktop foundation.
 
 ---
 
 ## 📦 Project status
 
-⚠️ **Early development**
+Web2Desktop is available in version **1.0.0**, stable and fully functional.
 
-web2desktop is currently under active development.  
-APIs may evolve, and some features are experimental.
-
-Feedback and contributions are very welcome.
+The project continues to evolve based on user feedback to improve the experience, flexibility, and feature set, while keeping a solid base.
 
 ---
 
@@ -105,21 +142,21 @@ Please read:
 - [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 - [`CONTRIBUTING_FR.md`](./CONTRIBUTING_FR.md)
 
-Whether it’s a bug report, documentation improvement, or a feature idea — your input matters.
+Whether it’s a bug report, a documentation improvement, or a feature idea — your input matters.
 
 ---
 
 ## 📜 License
 
-web2desktop is licensed under the **MIT License**.
+Web2Desktop is licensed under the **MIT License**.
 
-You are free to use it in personal, commercial, and open source projects.
+You are free to use it in personal, commercial, and open-source projects.
 
 ---
 
 ## ❤️ Support
 
-If web2desktop helps you, you can support its development via GitHub Sponsors (coming soon).
+If Web2Desktop helps you, you can support its development via GitHub Sponsors (coming soon).
 
 ---
 
@@ -132,4 +169,4 @@ If web2desktop helps you, you can support its development via GitHub Sponsors (c
 
 ---
 
-Built with care for the open source community 🚀
+Built with care for the open-source community 🚀
