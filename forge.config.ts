@@ -8,8 +8,9 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerDMG } from "@electron-forge/maker-dmg";
 import { MakerRpm } from "@electron-forge/maker-rpm";
-import { MakerSquirrel } from "@electron-forge/maker-squirrel";
+import {MakerMSIX} from "@electron-forge/maker-msix"
 import { MakerWix } from "@electron-forge/maker-wix";
+import { MakerSquirrel } from "@electron-forge/maker-squirrel";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import type { ForgeConfig } from "@electron-forge/shared-types";
@@ -66,6 +67,26 @@ const config: ForgeConfig = {
 };
 
 /** Windows */
+if (config.makers && appConfig.build?.windows?.markers?.includes("msix")) {
+  config.makers.push(
+    new MakerMSIX({
+      manifestVariables: {
+        appDisplayName: appConfig.name,
+        packageIdentity: appConfig.build.appBundleId,
+        packageVersion: appConfig.build.version,
+        publisher: appConfig.build.copyright || appConfig.build.author,
+        publisherDisplayName:  appConfig.build.author,
+      },
+      logLevel: "warn",
+      sign: !!appConfig.build.windows.signature?.certificateFile,
+      windowsSignOptions: appConfig.build.windows.signature ? {
+        certificateFile: appConfig.build.windows.signature?.certificateFile,
+        certificatePassword: appConfig.build.windows.signature?.certificatePassword
+      } : undefined,
+    }),
+  );
+}
+
 if (config.makers && appConfig.build?.windows?.markers?.includes("wix")) {
   config.makers.push(
     new MakerWix({
@@ -100,6 +121,13 @@ if (config.makers && appConfig.build?.windows?.markers?.includes("squirrel")) {
         appConfig.build.windows.signature?.certificatePassword,
     }),
   );
+}
+
+if(config.packagerConfig && appConfig.build?.windows?.signature){
+  config.packagerConfig.windowsSign = {
+    certificateFile: appConfig.build.windows.signature.certificateFile,
+    certificatePassword: appConfig.build.windows.signature.certificatePassword
+  }
 }
 
 /** Apple */

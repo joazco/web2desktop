@@ -9,7 +9,17 @@ This document explains how building a Windows executable and installer works.
 By default on Windows, `npm run make` generates a `.zip` file in `out/make` containing everything needed to run your app’s `.exe`.
 
 
+### MSIX
+
+https://www.electronforge.io/config/makers/msix
+
+- Télécharger le SDK Windows https://learn.microsoft.com/fr-fr/windows/apps/windows-sdk/downloads
+
+Ne marche que si un certificat de signature est inclus
+
 ### WiX
+
+https://www.electronforge.io/config/makers/wix-msi
 
 - Télécharger WiX Tools https://github.com/wixtoolset/wix3/releases
 - Mettre dans les variable envs `C:\Program Files (x86)\WiX Toolset v3.14\bin`
