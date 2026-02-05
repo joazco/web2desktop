@@ -9,6 +9,7 @@ import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerDMG } from "@electron-forge/maker-dmg";
 import { MakerRpm } from "@electron-forge/maker-rpm";
 import { MakerSquirrel } from "@electron-forge/maker-squirrel";
+import { MakerWix } from "@electron-forge/maker-wix";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import type { ForgeConfig } from "@electron-forge/shared-types";
@@ -65,12 +66,27 @@ const config: ForgeConfig = {
 };
 
 /** Windows */
+if (config.makers && appConfig.build?.windows?.markers?.includes("wix")) {
+  config.makers.push(
+    new MakerWix({
+      manufacturer: appConfig.build.copyright || appConfig.build.author,
+      name: appConfig.name,
+      version: appConfig.build.version,
+      icon: path.join(__dirname, "resources", "images", "icon.ico"),
+      certificateFile: appConfig.build.windows.signature?.certificateFile,
+      certificatePassword:
+        appConfig.build.windows.signature?.certificatePassword,
+    }),
+  );
+}
+
 if (config.makers && appConfig.build?.windows?.markers?.includes("squirrel")) {
   config.makers.push(
     new MakerSquirrel({
       authors: appConfig.build.author,
       name: appConfig.name,
       copyright: appConfig.build.copyright,
+      version: appConfig.build.version,
       setupIcon: path.join(__dirname, "resources", "images", "icon.ico"),
       iconUrl: path.join(__dirname, "resources", "images", "icon.ico"),
       certificateFile: appConfig.build.windows.signature?.certificateFile,
