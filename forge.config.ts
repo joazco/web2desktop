@@ -76,6 +76,12 @@ if (config.makers && appConfig.build?.windows?.markers?.includes("wix")) {
       certificateFile: appConfig.build.windows.signature?.certificateFile,
       certificatePassword:
         appConfig.build.windows.signature?.certificatePassword,
+      ui: {
+        chooseDirectory: true,
+        images: {
+          background: path.join(__dirname, "resources", "images", "icon.png"),
+        }
+      }
     }),
   );
 }

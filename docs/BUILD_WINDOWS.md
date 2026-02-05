@@ -8,7 +8,15 @@ This document explains how building a Windows executable and installer works.
 
 By default on Windows, `npm run make` generates a `.zip` file in `out/make` containing everything needed to run your app’s `.exe`.
 
+
+### WiX
+
+- Télécharger WiX Tools https://github.com/wixtoolset/wix3/releases
+- Mettre dans les variable envs `C:\Program Files (x86)\WiX Toolset v3.14\bin`
+
 ### Squirrel.Windows
+
+EXPLIQUER QUE SA MET DANS APP DATA pas recommandé
 
 You can refer to the [Squirrel.Windows documentation](https://www.electronforge.io/config/makers/squirrel.windows) et à la [documentation Electron](https://www.electronjs.org/fr/docs/latest/tutorial/code-signing).
 
