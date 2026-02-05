@@ -32,7 +32,7 @@ export interface ForgeBuildInterface {
   };
   windows?: {
     // https://www.electronforge.io/config/makers/wix-msi | https://www.electronforge.io/config/makers/squirrel.windows
-    markers?: ("wix" | "squirrel")[];
+    markers?: ("msix" |"wix" | "squirrel")[];
     signature?: {
       certificateFile: MakerSquirrelConfig["certificateFile"];
       certificatePassword: MakerSquirrelConfig["certificatePassword"];

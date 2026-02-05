@@ -81,7 +81,7 @@ const config: Omit<AppConfigInterface, "size"> = {
     homepage: "https://joazco.com",
     copyright: "© Web2Desktop JOAZCO Inc.",
     windows: {
-      markers: ["wix"]
+      markers: ["msix"]
     },
     // apple: {},
     // linux: {}
