@@ -31,8 +31,8 @@ export interface ForgeBuildInterface {
     };
   };
   windows?: {
-    // https://www.electronforge.io/config/makers/squirrel.windows
-    markers?: "squirrel"[];
+    // https://www.electronforge.io/config/makers/wix-msi | https://www.electronforge.io/config/makers/squirrel.windows
+    markers?: ("wix" | "squirrel")[];
     signature?: {
       certificateFile: MakerSquirrelConfig["certificateFile"];
       certificatePassword: MakerSquirrelConfig["certificatePassword"];
