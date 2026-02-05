@@ -76,9 +76,6 @@ if (config.makers && appConfig.build?.windows?.markers?.includes("squirrel")) {
       certificateFile: appConfig.build.windows.signature?.certificateFile,
       certificatePassword:
         appConfig.build.windows.signature?.certificatePassword,
-      setupExe: `${appConfig.name}.exe`,
-      setupMsi: `${appConfig.name} Setup`,
-      noMsi: false,
     }),
   );
 }
