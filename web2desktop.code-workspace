@@ -9,6 +9,10 @@
       "path": "./out",
     },
     {
+      "name": "www",
+      "path": "./www",
+    },
+    {
       "name": "Docs",
       "path": "./docs",
     },

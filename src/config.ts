@@ -48,21 +48,21 @@ const config: Omit<AppConfigInterface, "size"> = {
         },
       ],
     },
-    // {
-    //   label: "Steam",
-    //   submenu: [
-    //     {
-    //       id: "see-store-page",
-    //       label: "See Store Page",
-    //       accelerator: "Ctrl+T",
-    //     },
-    //     {
-    //       id: "see-achievements",
-    //       label: "See achievements",
-    //       accelerator: "Ctrl+P",
-    //     },
-    //   ],
-    // },
+    {
+      label: "Steam",
+      submenu: [
+        {
+          id: "see-store-page",
+          label: "See Store Page",
+          accelerator: "Ctrl+T",
+        },
+        {
+          id: "see-achievements",
+          label: "See achievements",
+          accelerator: "Ctrl+P",
+        },
+      ],
+    },
   ],
   webSource: {
     prod: {
@@ -80,15 +80,17 @@ const config: Omit<AppConfigInterface, "size"> = {
     maintainerEmail: "contact@joazco.com",
     homepage: "https://joazco.com",
     copyright: "© Web2Desktop JOAZCO Inc.",
-    // windows: {},
+    windows: {
+      markers: ["msix"]
+    },
     // apple: {},
     // linux: {}
   },
-  // plugins: {
-  //   Steam: {
-  //     appId: 12345678,
-  //   },
-  // },
+  plugins: {
+    Steam: {
+      appId: 3119460,
+    },
+  },
 };
 
 export default config;
