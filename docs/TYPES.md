@@ -98,7 +98,7 @@
 
 | Property    | Type                                                                                    | Description                      |
 | ----------- | --------------------------------------------------------------------------------------- | -------------------------------- |
-| `markers`   | `"squirrel"[]`                                                                          | Windows maker to use (Squirrel). |
+| `markers`   | `("wix" \| "squirrel" \| "msix")[]`                                                      | Windows makers to use (Wix, Squirrel, MSIX). |
 | `signature` | [`ForgeBuildInterfaceWindowsSignature`](#interface-forgebuildinterfacewindowssignature) | Windows signing configuration.   |
 
 #### Interface `ForgeBuildInterfaceWindowsSignature`:
