@@ -1,8 +1,7 @@
 {
   "name": "web2desktop",
-  "productName": "web2desktop",
   "version": "1.0.0",
-  "description": "Web2Desktop transforms any already built website or web application into a native desktop application for Windows, macOS, and Linux.",
+  "description": "Web2Desktop is an Electron framework designed to quickly turn any web interface into a desktop application.",
   "main": "./dist/main.js",
   "scripts": {
     "start": "electron-forge start",

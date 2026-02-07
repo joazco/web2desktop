@@ -8,7 +8,9 @@
 
 import Store from "electron-store";
 
-const store = new Store<Record<string, unknown>>();
+const store = new Store<Record<string, unknown>>({
+  encryptionKey: undefined,
+});
 
 export const setData = (key: string, data: unknown) => {
   store.set(key, data);

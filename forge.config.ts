@@ -7,10 +7,10 @@
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
 import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerDMG } from "@electron-forge/maker-dmg";
+import { MakerMSIX } from "@electron-forge/maker-msix";
 import { MakerRpm } from "@electron-forge/maker-rpm";
-import {MakerMSIX} from "@electron-forge/maker-msix"
-import { MakerWix } from "@electron-forge/maker-wix";
 import { MakerSquirrel } from "@electron-forge/maker-squirrel";
+import { MakerWix } from "@electron-forge/maker-wix";
 import { MakerZIP } from "@electron-forge/maker-zip";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import type { ForgeConfig } from "@electron-forge/shared-types";
@@ -75,14 +75,17 @@ if (config.makers && appConfig.build?.windows?.markers?.includes("msix")) {
         packageIdentity: appConfig.build.appBundleId,
         packageVersion: appConfig.build.version,
         publisher: appConfig.build.copyright || appConfig.build.author,
-        publisherDisplayName:  appConfig.build.author,
+        publisherDisplayName: appConfig.build.author,
       },
       logLevel: "warn",
       sign: !!appConfig.build.windows.signature?.certificateFile,
-      windowsSignOptions: appConfig.build.windows.signature ? {
-        certificateFile: appConfig.build.windows.signature?.certificateFile,
-        certificatePassword: appConfig.build.windows.signature?.certificatePassword
-      } : undefined,
+      windowsSignOptions: appConfig.build.windows.signature
+        ? {
+            certificateFile: appConfig.build.windows.signature?.certificateFile,
+            certificatePassword:
+              appConfig.build.windows.signature?.certificatePassword,
+          }
+        : undefined,
     }),
   );
 }
@@ -101,8 +104,8 @@ if (config.makers && appConfig.build?.windows?.markers?.includes("wix")) {
         chooseDirectory: true,
         images: {
           background: path.join(__dirname, "resources", "images", "icon.png"),
-        }
-      }
+        },
+      },
     }),
   );
 }
@@ -123,11 +126,11 @@ if (config.makers && appConfig.build?.windows?.markers?.includes("squirrel")) {
   );
 }
 
-if(config.packagerConfig && appConfig.build?.windows?.signature){
+if (config.packagerConfig && appConfig.build?.windows?.signature) {
   config.packagerConfig.windowsSign = {
     certificateFile: appConfig.build.windows.signature.certificateFile,
-    certificatePassword: appConfig.build.windows.signature.certificatePassword
-  }
+    certificatePassword: appConfig.build.windows.signature.certificatePassword,
+  };
 }
 
 /** Apple */
