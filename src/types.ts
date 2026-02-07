@@ -6,15 +6,15 @@
  * © 2026 Jordan Azoulay — MIT License
  */
 
-import { MakerDebConfig } from "@electron-forge/maker-deb";
+import { MakerDebConfigOptions } from "@electron-forge/maker-deb/dist/Config";
 import { MakerSquirrelConfig } from "@electron-forge/maker-squirrel";
-import type { ForgeConfig } from "@electron-forge/shared-types";
+import type { ForgePackagerOptions } from "@electron-forge/shared-types";
 import { BrowserWindow, MenuItemConstructorOptions } from "electron";
 
 /** interface ForgeBuildInterface */
 export interface ForgeBuildInterface {
-  version?: ForgeConfig["packagerConfig"]["appVersion"];
-  appBundleId?: ForgeConfig["packagerConfig"]["appBundleId"];
+  version?: ForgePackagerOptions["appVersion"];
+  appBundleId?: ForgePackagerOptions["appBundleId"];
   author?: string;
   maintainerEmail?: string;
   homepage?: string;
@@ -42,7 +42,7 @@ export interface ForgeBuildInterface {
     // https://www.electronforge.io/config/makers/deb
     // https://www.electronforge.io/config/makers/rpm
     makers?: ("deb" | "rpm")[];
-    categories: MakerDebConfig["options"]["categories"];
+    categories?: MakerDebConfigOptions["categories"];
   };
 }
 
