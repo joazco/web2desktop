@@ -79,6 +79,7 @@ export class AppInfos {
     if (newConfig.fullScreen !== undefined) {
       const resizable = mainWindow.isResizable();
       mainWindow.setFullScreenable(true);
+      mainWindow.setFullScreenable(true);
       mainWindow.setFullScreen(newConfig.fullScreen);
       await this.wait(100);
       mainWindow.setFullScreenable(resizable);
