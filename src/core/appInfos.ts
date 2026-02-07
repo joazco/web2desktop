@@ -78,11 +78,12 @@ export class AppInfos {
     // Fullscreen has special constraints when the window isn't resizable.
     if (newConfig.fullScreen !== undefined) {
       const resizable = mainWindow.isResizable();
-      mainWindow.setFullScreenable(true);
+      mainWindow.setResizable(true);
       mainWindow.setFullScreenable(true);
       mainWindow.setFullScreen(newConfig.fullScreen);
       await this.wait(100);
       mainWindow.setFullScreenable(resizable);
+      mainWindow.setResizable(resizable);
     }
     if (newConfig.resizable !== undefined) {
       mainWindow.setResizable(newConfig.resizable);
