@@ -35,8 +35,8 @@ export class App {
     const primaryDisplay = screen.getPrimaryDisplay();
     const { width, height } = primaryDisplay.workAreaSize;
     this.window = new BrowserWindow({
-      width: width / 2,
-      height: height / 1.5,
+      width,
+      height,
       title: global.config.name,
       center: true,
       fullscreenable: true,
