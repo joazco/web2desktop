@@ -8,7 +8,7 @@
     "build": "tsc -p .",
     "dev": "concurrently -k \"npm:dev:ts\" \"npm:dev:electron\"",
     "dev:ts": "tsc -w -p .",
-    "dev:electron": "wait-on dist/main.js && nodemon --delay 200ms --watch dist --watch www --watch splash --watch demo --ext js,json,html,css,png,jpg,svg --signal SIGTERM --exec \"npm run start\"",
+    "dev:electron": "wait-on dist/main.js && nodemon --delay 800ms --watch dist --watch www --watch splash --watch demo --ext js,json,html,css,png,jpg,svg --exec \"electron .\"",
     "package": "npm run build && electron-forge package",
     "make": "npm run build && electron-forge make",
     "make:demo": "rimraf \"www/*\" --glob && cpy \"demo/**\" www --parents && npm run make",
