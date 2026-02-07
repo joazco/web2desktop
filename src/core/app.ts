@@ -9,8 +9,10 @@ import {
   BrowserWindow,
   globalShortcut,
   ipcMain,
+  KeyboardEvent,
   Menu,
   MenuItem,
+  MenuItemConstructorOptions,
   screen,
   shell,
 } from "electron";
@@ -80,15 +82,14 @@ export class App {
       return;
     }
 
-    const {
-      webSource: {
-        dev: { mode, target },
-      },
-    } = global.config;
+    const mode = global.config.webSource?.dev?.mode;
+    const target = global.config.webSource?.dev?.target;
+
     if (!mode || !target) {
       this.window
         .loadFile(path.join(__dirname, "..", "..", "www", "index.html"))
         .then(resolver);
+      return;
     }
     switch (mode) {
       case "file": {
@@ -175,7 +176,7 @@ export class App {
   private setAppMenu() {
     const { config, isProduction } = global;
     const allPlugins = getAllPlugins();
-    const handleClickMenuItem = (
+    const handleClickMenuItem: MenuItemConstructorOptions["click"] = (
       menuItem: MenuItem,
       _window: BaseWindow | undefined,
       _event: KeyboardEvent,
@@ -186,7 +187,7 @@ export class App {
       allPlugins
         .filter((plugin) => !!plugin.handleClickAppMenuItem)
         .forEach((plugin) => {
-          plugin.handleClickAppMenuItem(menuItem.id);
+          plugin.handleClickAppMenuItem?.(menuItem.id);
         });
     };
 
