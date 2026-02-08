@@ -1,6 +1,8 @@
 {
   "name": "web2desktop",
+  "productName": "Web2Desktop",
   "version": "1.0.0",
+  "web2desktopVersion": "1.0.0",
   "description": "Web2Desktop is an Electron framework designed to quickly turn any web interface into a desktop application.",
   "main": "./dist/main.js",
   "scripts": {
