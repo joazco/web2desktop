@@ -4,6 +4,11 @@ Before running the project, define the default configuration for your app in [`.
 
 **_You can also create a [`src/config.local.json`](../src/config.local.json) file to override values from `config.ts`. This file uses JSON format, which is easier to edit or generate from external code or tools._**
 
+## Package.json - Important
+
+Before building for production, make sure `package.json` has the correct values for `name`, `productName`, and `version`.
+These fields must match your application identity and release, otherwise production build behavior and generated app metadata can be incorrect.
+
 ## App Config
 
 The default application configuration is defined in [`./src/config.ts`](../src/config.ts). To understand its structure, you can refer to the typing documentation in [typage](./TYPES.md).
