@@ -20,6 +20,7 @@ const config: Omit<AppConfigInterface, "size"> = {
         {
           id: "quit",
           label: "&Quit",
+          role: "quit",
         },
       ],
     },
