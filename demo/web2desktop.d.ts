@@ -1,4 +1,4 @@
-type AppConfigInterface = {
+export type AppConfigInterface = {
   themeSource?: "system" | "light" | "dark";
   fullScreen?: boolean;
   resizable?: boolean;
