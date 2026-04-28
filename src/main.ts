@@ -12,41 +12,52 @@ import { AppInfos } from "./core/appInfos";
 import { SplashScreen } from "./core/splash";
 import { loadConfig } from "./utils/config";
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
 }
 
-/** */
-global.isProduction = !!app.isPackaged;
-global.config = loadConfig();
-global.web2desktopPlugins = new Map();
-/** */
+const gotTheLock = app.requestSingleInstanceLock();
 
-/** Create cores */
-const splashWindow = new SplashScreen();
-const appInfos = new AppInfos();
-const appWindow = new App(appInfos);
-
-const createWindow = async () => {
-  await splashWindow.createWindow();
-  appWindow.createWindow();
-};
-
-app.on("ready", () => {
-  Menu.setApplicationMenu(Menu.buildFromTemplate([]));
-  createWindow();
-});
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on("window-all-closed", () => {
+if (!gotTheLock) {
   app.quit();
-});
+} else {
+  global.isProduction = !!app.isPackaged;
+  global.config = loadConfig();
+  global.web2desktopPlugins = new Map();
 
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
+  const splashWindow = new SplashScreen();
+  const appInfos = new AppInfos();
+  const appWindow = new App(appInfos);
+
+  const createWindow = async (): Promise<void> => {
+    await splashWindow.createWindow();
+    appWindow.createWindow();
+  };
+
+  app.on("second-instance", () => {
+    const window = BrowserWindow.getAllWindows()[0];
+
+    if (window) {
+      if (window.isMinimized()) {
+        window.restore();
+      }
+
+      window.focus();
+    }
+  });
+
+  app.on("ready", () => {
+    Menu.setApplicationMenu(Menu.buildFromTemplate([]));
+    void createWindow();
+  });
+
+  app.on("window-all-closed", () => {
+    app.quit();
+  });
+
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      void createWindow();
+    }
+  });
+}
