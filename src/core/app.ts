@@ -40,6 +40,7 @@ export class App {
       title: global.config.name,
       center: true,
       fullscreenable: true,
+      autoHideMenuBar: false,
       webPreferences: {
         sandbox: true,
         preload: path.join(__dirname, "..", "preload.js"),
@@ -54,13 +55,16 @@ export class App {
     global.mainWindow = this.window;
 
     // UI + lifecycle wiring.
-    this.setAppMenu();
     this.listeners();
     this.disableDevToolInProduction();
     this.openLinkInExternalBrowser();
 
     // Initialize feature modules after the window exists.
     this.appInfos.init();
+
+    this.window.once("ready-to-show", () => {
+      this.setAppMenu();
+    });
   }
 
   private loadUrl() {
@@ -212,6 +216,11 @@ export class App {
     );
 
     Menu.setApplicationMenu(menu);
+
+    if (process.platform === "linux" || process.platform === "win32") {
+      this.window.setMenu(menu);
+      this.window.setMenuBarVisibility(true);
+    }
   }
 
   private logPlugins() {
