@@ -33,6 +33,10 @@
         "alphabetize": { "order": "asc", "caseInsensitive": true }
       }
     ],
-    "@typescript-eslint/no-empty-function": "warn"
+    "@typescript-eslint/no-empty-function": "warn",
+    "import/no-unresolved": [
+      "error",
+      { "ignore": ["^@electron-forge/", "^@electron/fuses$"] }
+    ]
   }
 }

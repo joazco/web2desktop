@@ -82,7 +82,16 @@ const config: Omit<AppConfigInterface, "size"> = {
     homepage: "https://joazco.com",
     copyright: "© Web2Desktop JOAZCO Inc.",
     // windows: {},
-    // apple: {},
+    apple: {
+      makers: ["dmg"],
+      signature: {
+        identity:
+          'E2AC9F15CCBFABA1205F7BE549DE725578EA37A7 "Developer ID Application: Jordan AZOULAY (U4GUN9B2KX)"',
+        appleId: "jazoulay@joazco.com",
+        appleIdPassword: "ztxd-vkdq-hdyy-auwm",
+        teamId: "U4GUN9B2KX",
+      },
+    },
     // linux: {}
   },
   // plugins: {
